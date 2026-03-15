@@ -1,0 +1,11 @@
+{
+    "name": "snake",
+    "type": "module",
+    "exports": {
+        "./snake": "./snake.js",
+        ".": "./index.js"
+    },
+    "dependencies": {
+        "@temperlang/core": "0.6.0"
+    }
+}

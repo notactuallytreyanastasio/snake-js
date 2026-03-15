@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.004" tests="18" failures="0">
+  <testsuite name="Root Suite" timestamp="2026-03-15T06:08:05" tests="18" time="0.004" failures="0">
+    <testcase name="initial state has snake near center" time="0.000" classname="initial state has snake near center">
+    </testcase>
+    <testcase name="initial status is Playing" time="0.000" classname="initial status is Playing">
+    </testcase>
+    <testcase name="initial direction is Right" time="0.000" classname="initial direction is Right">
+    </testcase>
+    <testcase name="initial score is 0" time="0.000" classname="initial score is 0">
+    </testcase>
+    <testcase name="snake moves right" time="0.000" classname="snake moves right">
+    </testcase>
+    <testcase name="snake moves down" time="0.001" classname="snake moves down">
+    </testcase>
+    <testcase name="snake moves up" time="0.000" classname="snake moves up">
+    </testcase>
+    <testcase name="opposite direction is rejected" time="0.000" classname="opposite direction is rejected">
+    </testcase>
+    <testcase name="non-opposite direction is accepted" time="0.000" classname="non-opposite direction is accepted">
+    </testcase>
+    <testcase name="wall collision causes game over" time="0.000" classname="wall collision causes game over">
+    </testcase>
+    <testcase name="self collision causes game over" time="0.000" classname="self collision causes game over">
+    </testcase>
+    <testcase name="pointEquals works for same points" time="0.000" classname="pointEquals works for same points">
+    </testcase>
+    <testcase name="pointEquals works for different points" time="0.000" classname="pointEquals works for different points">
+    </testcase>
+    <testcase name="isOpposite detects opposite directions" time="0.000" classname="isOpposite detects opposite directions">
+    </testcase>
+    <testcase name="directionDelta returns correct deltas" time="0.000" classname="directionDelta returns correct deltas">
+    </testcase>
+    <testcase name="PRNG is deterministic" time="0.000" classname="PRNG is deterministic">
+    </testcase>
+    <testcase name="PRNG produces values in range" time="0.000" classname="PRNG produces values in range">
+    </testcase>
+    <testcase name="tick does nothing when game is over" time="0.000" classname="tick does nothing when game is over">
+    </testcase>
+  </testsuite>
+</testsuites>

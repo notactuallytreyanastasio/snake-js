@@ -1,0 +1,17 @@
+{
+  "name": "",
+  "description": "Generated package to allow running a Temper module",
+  "version": "0.0.0",
+  "main": "js/index.js",
+  "type": "module",
+  "dependencies": {},
+  "devDependencies": {},
+  "workspaces": [
+    "./std",
+    "./snake-test",
+    "./snake-game",
+    "./temper-core",
+    "./snake"
+  ],
+  "private": true
+}
