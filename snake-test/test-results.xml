@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.004" tests="18" failures="0">
-  <testsuite name="Root Suite" timestamp="2026-03-15T08:11:09" tests="18" time="0.004" failures="0">
-    <testcase name="initial state has snake near center" time="0.000" classname="initial state has snake near center">
+<testsuites name="Mocha Tests" time="0.005" tests="18" failures="0">
+  <testsuite name="Root Suite" timestamp="2026-03-15T08:29:37" tests="18" time="0.004" failures="0">
+    <testcase name="initial state has snake near center" time="0.001" classname="initial state has snake near center">
     </testcase>
     <testcase name="initial status is Playing" time="0.000" classname="initial status is Playing">
     </testcase>
@@ -11,11 +11,11 @@
     </testcase>
     <testcase name="snake moves right" time="0.000" classname="snake moves right">
     </testcase>
-    <testcase name="snake moves down" time="0.001" classname="snake moves down">
+    <testcase name="snake moves down" time="0.000" classname="snake moves down">
     </testcase>
     <testcase name="snake moves up" time="0.000" classname="snake moves up">
     </testcase>
-    <testcase name="opposite direction is rejected" time="0.000" classname="opposite direction is rejected">
+    <testcase name="opposite direction is rejected" time="0.001" classname="opposite direction is rejected">
     </testcase>
     <testcase name="non-opposite direction is accepted" time="0.000" classname="non-opposite direction is accepted">
     </testcase>
