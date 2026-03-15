@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites name="Mocha Tests" time="0.006" tests="18" failures="0">
-  <testsuite name="Root Suite" timestamp="2026-03-15T08:46:19" tests="18" time="0.005" failures="0">
+  <testsuite name="Root Suite" timestamp="2026-03-15T08:47:38" tests="18" time="0.005" failures="0">
     <testcase name="initial state has snake near center" time="0.001" classname="initial state has snake near center">
     </testcase>
     <testcase name="initial status is Playing" time="0.000" classname="initial status is Playing">
     </testcase>
     <testcase name="initial direction is Right" time="0.000" classname="initial direction is Right">
     </testcase>
-    <testcase name="initial score is 0" time="0.001" classname="initial score is 0">
+    <testcase name="initial score is 0" time="0.000" classname="initial score is 0">
     </testcase>
     <testcase name="snake moves right" time="0.000" classname="snake moves right">
     </testcase>
     <testcase name="snake moves down" time="0.000" classname="snake moves down">
     </testcase>
-    <testcase name="snake moves up" time="0.001" classname="snake moves up">
+    <testcase name="snake moves up" time="0.000" classname="snake moves up">
     </testcase>
     <testcase name="opposite direction is rejected" time="0.000" classname="opposite direction is rejected">
     </testcase>
@@ -23,7 +23,7 @@
     </testcase>
     <testcase name="self collision causes game over" time="0.000" classname="self collision causes game over">
     </testcase>
-    <testcase name="pointEquals works for same points" time="0.001" classname="pointEquals works for same points">
+    <testcase name="pointEquals works for same points" time="0.000" classname="pointEquals works for same points">
     </testcase>
     <testcase name="pointEquals works for different points" time="0.000" classname="pointEquals works for different points">
     </testcase>
