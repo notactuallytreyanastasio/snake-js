@@ -687,7 +687,7 @@ export function render(game_199) {
     sb_204[0] += "#";
     x_205 = x_205 + 1 | 0;
   }
-  sb_204[0] += "#\n";
+  sb_204[0] += "#\r\n";
   let y_206 = 0;
   while (true) {
     t_201 = game_199.height;
@@ -705,7 +705,7 @@ export function render(game_199) {
       sb_204[0] += cellChar_187(game_199, p_208);
       x_207 = x_207 + 1 | 0;
     }
-    sb_204[0] += "#\n";
+    sb_204[0] += "#\r\n";
     y_206 = y_206 + 1 | 0;
   }
   sb_204[0] += "#";
@@ -718,7 +718,7 @@ export function render(game_199) {
     sb_204[0] += "#";
     x_209 = x_209 + 1 | 0;
   }
-  sb_204[0] += "#\n";
+  sb_204[0] += "#\r\n";
   let statusText_210;
   let t_211 = game_199.status;
   if (t_211 instanceof Playing) {
@@ -728,6 +728,6 @@ export function render(game_199) {
   } else {
     statusText_210 = "";
   }
-  sb_204[0] += "Score: " + game_199.score.toString() + "  " + statusText_210 + "\n";
+  sb_204[0] += "Score: " + game_199.score.toString() + "  " + statusText_210 + "\r" + "\n";
   return sb_204[0];
 };
