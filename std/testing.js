@@ -1,302 +1,302 @@
 import {
-  strict as strict__13
+  strict as strict__22
 } from "assert";
 import {
-  type as type__27, listBuilderAdd as listBuilderAdd_7, listBuilderToList as listBuilderToList_17, listedJoin as listedJoin_25, pairConstructor as pairConstructor_42, listedMap as listedMap_43, stringGet as stringGet_62, stringNext as stringNext_64, listedReduceFrom as listedReduceFrom_76, listedGet as listedGet_80
+  type as type__36, listBuilderAdd as listBuilderAdd_16, listBuilderToList as listBuilderToList_26, listedJoin as listedJoin_34, pairConstructor as pairConstructor_51, listedMap as listedMap_52, stringGet as stringGet_71, stringNext as stringNext_73, listedReduceFrom as listedReduceFrom_85, listedGet as listedGet_89
 } from "@temperlang/core";
-export class Test extends type__27() {
+export class Test extends type__36() {
   /**
-   * @param {boolean} success_3
-   * @param {() => string} message_4
+   * @param {boolean} success_12
+   * @param {() => string} message_13
    */
-  assert(success_3, message_4) {
-    let t_5;
-    if (! success_3) {
-      this.#_passing_6 = false;
-      t_5 = message_4();
-      listBuilderAdd_7(this.#_messages_8, t_5);
+  assert(success_12, message_13) {
+    let t_14;
+    if (! success_12) {
+      this.#_passing_15 = false;
+      t_14 = message_13();
+      listBuilderAdd_16(this.#_messages_17, t_14);
     }
     return;
   }
   /**
-   * @param {boolean} success_10
-   * @param {() => string} message_11
+   * @param {boolean} success_19
+   * @param {() => string} message_20
    * @returns {void}
    */
-  assertHard(success_10, message_11) {
-    this.assert(success_10, message_11);
-    if (! success_10) {
-      this.#_failedOnAssert_12 = true;
-      strict__13.fail(this.messagesCombined());
+  assertHard(success_19, message_20) {
+    this.assert(success_19, message_20);
+    if (! success_19) {
+      this.#_failedOnAssert_21 = true;
+      strict__22.fail(this.messagesCombined());
     }
     return;
   }
   /** @returns {void} */
   softFailToHard() {
     if (this.hasUnhandledFail) {
-      this.#_failedOnAssert_12 = true;
-      strict__13.fail(this.messagesCombined());
+      this.#_failedOnAssert_21 = true;
+      strict__22.fail(this.messagesCombined());
     }
     return;
   }
   /** @returns {boolean} */
   get passing() {
-    return this.#_passing_6;
+    return this.#_passing_15;
   }
   /** @returns {Array<string>} */
   messages() {
-    return listBuilderToList_17(this.#_messages_8);
+    return listBuilderToList_26(this.#_messages_17);
   }
   /** @returns {boolean} */
   get failedOnAssert() {
-    return this.#_failedOnAssert_12;
+    return this.#_failedOnAssert_21;
   }
   /** @returns {boolean} */
   get hasUnhandledFail() {
-    let t_20;
-    if (this.#_failedOnAssert_12) {
-      t_20 = true;
+    let t_29;
+    if (this.#_failedOnAssert_21) {
+      t_29 = true;
     } else {
-      t_20 = this.#_passing_6;
+      t_29 = this.#_passing_15;
     }
-    return ! t_20;
+    return ! t_29;
   }
   /** @returns {string | null} */
   messagesCombined() {
-    let return_22;
-    if (! this.#_messages_8.length) {
-      return_22 = null;
+    let return_31;
+    if (! this.#_messages_17.length) {
+      return_31 = null;
     } else {
-      function fn_23(it_24) {
-        return it_24;
+      function fn_32(it_33) {
+        return it_33;
       }
-      return_22 = listedJoin_25(this.#_messages_8, ", ", fn_23);
+      return_31 = listedJoin_34(this.#_messages_17, ", ", fn_32);
     }
-    return return_22;
+    return return_31;
   }
   /** @type {boolean} */
-  #_failedOnAssert_12;
+  #_failedOnAssert_21;
   /** @type {boolean} */
-  #_passing_6;
+  #_passing_15;
   /** @type {Array<string>} */
-  #_messages_8;
+  #_messages_17;
   constructor() {
     super ();
-    this.#_failedOnAssert_12 = false;
-    this.#_passing_6 = true;
-    let t_26 = [];
-    this.#_messages_8 = t_26;
+    this.#_failedOnAssert_21 = false;
+    this.#_passing_15 = true;
+    let t_35 = [];
+    this.#_messages_17 = t_35;
     return;
   }
 };
 /**
- * @param {Array<Pair_44<string, (arg0: Test) => void>>} testCases_28
- * @returns {Array<Pair_44<string, Array<string>>>}
+ * @param {Array<Pair_53<string, (arg0: Test) => void>>} testCases_37
+ * @returns {Array<Pair_53<string, Array<string>>>}
  */
-export function processTestCases(testCases_28) {
-  function fn_29(testCase_30) {
-    let t_31;
-    let t_32;
-    let t_33;
-    let t_34;
-    const key_35 = testCase_30.key;
-    const fun_36 = testCase_30.value;
-    const test_37 = new Test();
-    let hadBubble_38 = false;
+export function processTestCases(testCases_37) {
+  function fn_38(testCase_39) {
+    let t_40;
+    let t_41;
+    let t_42;
+    let t_43;
+    const key_44 = testCase_39.key;
+    const fun_45 = testCase_39.value;
+    const test_46 = new Test();
+    let hadBubble_47 = false;
     try {
-      fun_36(test_37);
+      fun_45(test_46);
     } catch {
-      hadBubble_38 = true;
+      hadBubble_47 = true;
     }
-    const messages_39 = test_37.messages();
-    let failures_40;
-    if (test_37.passing) {
-      t_33 = ! hadBubble_38;
+    const messages_48 = test_46.messages();
+    let failures_49;
+    if (test_46.passing) {
+      t_42 = ! hadBubble_47;
     } else {
-      t_33 = false;
+      t_42 = false;
     }
-    if (t_33) {
-      failures_40 = Object.freeze([]);
+    if (t_42) {
+      failures_49 = Object.freeze([]);
     } else {
-      if (hadBubble_38) {
-        t_31 = test_37.failedOnAssert;
-        t_34 = ! t_31;
+      if (hadBubble_47) {
+        t_40 = test_46.failedOnAssert;
+        t_43 = ! t_40;
       } else {
-        t_34 = false;
+        t_43 = false;
       }
-      if (t_34) {
-        const allMessages_41 = messages_39.slice();
-        listBuilderAdd_7(allMessages_41, "Bubble");
-        t_32 = listBuilderToList_17(allMessages_41);
-        failures_40 = t_32;
+      if (t_43) {
+        const allMessages_50 = messages_48.slice();
+        listBuilderAdd_16(allMessages_50, "Bubble");
+        t_41 = listBuilderToList_26(allMessages_50);
+        failures_49 = t_41;
       } else {
-        failures_40 = messages_39;
+        failures_49 = messages_48;
       }
     }
-    return pairConstructor_42(key_35, failures_40);
+    return pairConstructor_51(key_44, failures_49);
   }
-  return listedMap_43(testCases_28, fn_29);
+  return listedMap_52(testCases_37, fn_38);
 };
 /**
- * @param {string} s_46
+ * @param {string} s_55
  * @returns {string}
  */
-function escapeXml_45(s_46) {
-  let return_47;
-  let t_48;
-  let t_49;
-  let t_50;
-  let t_51;
-  let t_52;
-  let t_53;
-  let t_54;
-  let t_55;
-  const sb_56 = [""];
-  const end_57 = s_46.length;
-  let emitted_58 = 0;
-  let i_59 = 0;
-  while (i_59 < end_57) {
-    continue_60: {
-      const c_61 = stringGet_62(s_46, i_59);
-      if (c_61 === 38) {
-        t_55 = "&amp;";
-      } else if (c_61 === 60) {
-        t_55 = "&lt;";
-      } else if (c_61 === 62) {
-        t_55 = "&gt;";
-      } else if (c_61 === 39) {
-        t_55 = "&#39;";
-      } else if (c_61 === 34) {
-        t_55 = "&#34;";
+function escapeXml_54(s_55) {
+  let return_56;
+  let t_57;
+  let t_58;
+  let t_59;
+  let t_60;
+  let t_61;
+  let t_62;
+  let t_63;
+  let t_64;
+  const sb_65 = [""];
+  const end_66 = s_55.length;
+  let emitted_67 = 0;
+  let i_68 = 0;
+  while (i_68 < end_66) {
+    continue_69: {
+      const c_70 = stringGet_71(s_55, i_68);
+      if (c_70 === 38) {
+        t_64 = "&amp;";
+      } else if (c_70 === 60) {
+        t_64 = "&lt;";
+      } else if (c_70 === 62) {
+        t_64 = "&gt;";
+      } else if (c_70 === 39) {
+        t_64 = "&#39;";
+      } else if (c_70 === 34) {
+        t_64 = "&#34;";
       } else {
-        if (c_61 === 10) {
-          t_51 = true;
+        if (c_70 === 10) {
+          t_60 = true;
         } else {
-          if (c_61 === 13) {
-            t_50 = true;
+          if (c_70 === 13) {
+            t_59 = true;
           } else {
-            t_50 = c_61 === 9;
+            t_59 = c_70 === 9;
           }
-          t_51 = t_50;
+          t_60 = t_59;
         }
-        if (t_51) {
-          break continue_60;
+        if (t_60) {
+          break continue_69;
         } else {
-          if (c_61 < 32) {
-            t_53 = true;
+          if (c_70 < 32) {
+            t_62 = true;
           } else {
-            if (c_61 === 65534) {
-              t_52 = true;
+            if (c_70 === 65534) {
+              t_61 = true;
             } else {
-              t_52 = c_61 === 65535;
+              t_61 = c_70 === 65535;
             }
-            t_53 = t_52;
+            t_62 = t_61;
           }
-          if (t_53) {
-            t_54 = "[0x" + c_61.toString(16) + "]";
+          if (t_62) {
+            t_63 = "[0x" + c_70.toString(16) + "]";
           } else {
-            break continue_60;
+            break continue_69;
           }
-          t_55 = t_54;
+          t_64 = t_63;
         }
       }
-      const esc_63 = t_55;
-      sb_56[0] += s_46.substring(emitted_58, i_59);
-      sb_56[0] += esc_63;
-      t_48 = stringNext_64(s_46, i_59);
-      emitted_58 = t_48;
+      const esc_72 = t_64;
+      sb_65[0] += s_55.substring(emitted_67, i_68);
+      sb_65[0] += esc_72;
+      t_57 = stringNext_73(s_55, i_68);
+      emitted_67 = t_57;
     }
-    t_49 = stringNext_64(s_46, i_59);
-    i_59 = t_49;
+    t_58 = stringNext_73(s_55, i_68);
+    i_68 = t_58;
   }
-  if (emitted_58 === 0) {
-    return_47 = s_46;
+  if (emitted_67 === 0) {
+    return_56 = s_55;
   } else {
-    sb_56[0] += s_46.substring(emitted_58, end_57);
-    return_47 = sb_56[0];
+    sb_65[0] += s_55.substring(emitted_67, end_66);
+    return_56 = sb_65[0];
   }
-  return return_47;
+  return return_56;
 }
 /**
- * @param {Array<Pair_44<string, Array<string>>>} testResults_65
- * @param {(arg0: string) => void} writeLine_66
+ * @param {Array<Pair_53<string, Array<string>>>} testResults_74
+ * @param {(arg0: string) => void} writeLine_75
  */
-export function reportTestResults(testResults_65, writeLine_66) {
-  let t_67;
-  let t_68;
-  let t_69;
-  writeLine_66("<testsuites>");
-  const total_70 = testResults_65.length.toString();
-  function fn_71(fails_72, testResult_73) {
-    let t_74;
-    if (! testResult_73.value.length) {
-      t_74 = 0;
+export function reportTestResults(testResults_74, writeLine_75) {
+  let t_76;
+  let t_77;
+  let t_78;
+  writeLine_75("<testsuites>");
+  const total_79 = testResults_74.length.toString();
+  function fn_80(fails_81, testResult_82) {
+    let t_83;
+    if (! testResult_82.value.length) {
+      t_83 = 0;
     } else {
-      t_74 = 1;
+      t_83 = 1;
     }
-    return fails_72 + t_74 | 0;
+    return fails_81 + t_83 | 0;
   }
-  const fails_75 = listedReduceFrom_76(testResults_65, 0, fn_71).toString();
-  const totals_77 = "tests='" + total_70 + "' failures='" + fails_75 + "'";
-  writeLine_66("  <testsuite name='suite' " + totals_77 + " time='0.0'>");
-  let i_78 = 0;
+  const fails_84 = listedReduceFrom_85(testResults_74, 0, fn_80).toString();
+  const totals_86 = "tests='" + total_79 + "' failures='" + fails_84 + "'";
+  writeLine_75("  <testsuite name='suite' " + totals_86 + " time='0.0'>");
+  let i_87 = 0;
   while (true) {
-    t_67 = testResults_65.length;
-    if (!(i_78 < t_67)) {
+    t_76 = testResults_74.length;
+    if (!(i_87 < t_76)) {
       break;
     }
-    const testResult_79 = listedGet_80(testResults_65, i_78);
-    const failureMessages_81 = testResult_79.value;
-    t_68 = testResult_79.key;
-    const name_82 = escapeXml_45(t_68);
-    const basics_83 = "name='" + name_82 + "' classname='" + name_82 + "' time='0.0'";
-    if (! failureMessages_81.length) {
-      writeLine_66("    <testcase " + basics_83 + " />");
+    const testResult_88 = listedGet_89(testResults_74, i_87);
+    const failureMessages_90 = testResult_88.value;
+    t_77 = testResult_88.key;
+    const name_91 = escapeXml_54(t_77);
+    const basics_92 = "name='" + name_91 + "' classname='" + name_91 + "' time='0.0'";
+    if (! failureMessages_90.length) {
+      writeLine_75("    <testcase " + basics_92 + " />");
     } else {
-      writeLine_66("    <testcase " + basics_83 + ">");
-      function fn_84(it_85) {
-        return it_85;
+      writeLine_75("    <testcase " + basics_92 + ">");
+      function fn_93(it_94) {
+        return it_94;
       }
-      t_69 = listedJoin_25(failureMessages_81, ", ", fn_84);
-      const message_86 = escapeXml_45(t_69);
-      writeLine_66("      <failure message='" + message_86 + "' />");
-      writeLine_66("    <\/testcase>");
+      t_78 = listedJoin_34(failureMessages_90, ", ", fn_93);
+      const message_95 = escapeXml_54(t_78);
+      writeLine_75("      <failure message='" + message_95 + "' />");
+      writeLine_75("    <\/testcase>");
     }
-    i_78 = i_78 + 1 | 0;
+    i_87 = i_87 + 1 | 0;
   }
-  writeLine_66("  <\/testsuite>");
-  writeLine_66("<\/testsuites>");
+  writeLine_75("  <\/testsuite>");
+  writeLine_75("<\/testsuites>");
   return;
 };
 /**
- * @param {Array<Pair_44<string, (arg0: Test) => void>>} testCases_87
+ * @param {Array<Pair_53<string, (arg0: Test) => void>>} testCases_96
  * @returns {string}
  */
-export function runTestCases(testCases_87) {
-  const report_88 = [""];
-  let t_89 = processTestCases(testCases_87);
-  function fn_90(line_91) {
-    report_88[0] += line_91;
-    report_88[0] += "\n";
+export function runTestCases(testCases_96) {
+  const report_97 = [""];
+  let t_98 = processTestCases(testCases_96);
+  function fn_99(line_100) {
+    report_97[0] += line_100;
+    report_97[0] += "\n";
     return;
   }
-  reportTestResults(t_89, fn_90);
-  return report_88[0];
+  reportTestResults(t_98, fn_99);
+  return report_97[0];
 };
 /**
- * @param {(arg0: Test) => void} testFun_92
+ * @param {(arg0: Test) => void} testFun_101
  * @returns {void}
  */
-export function runTest(testFun_92) {
-  const test_93 = new Test();
+export function runTest(testFun_101) {
+  const test_102 = new Test();
   try {
-    testFun_92(test_93);
+    testFun_101(test_102);
   } catch {
-    function fn_94() {
+    function fn_103() {
       return "bubble during test running";
     }
-    test_93.assert(false, fn_94);
+    test_102.assert(false, fn_103);
   }
-  test_93.softFailToHard();
+  test_102.softFailToHard();
   return;
 };

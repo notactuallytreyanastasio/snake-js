@@ -1,49 +1,49 @@
 import {
-  type as type__736, stdNetSend as stdNetSend_734, panic as panic_742
+  type as type__745, stdNetSend as stdNetSend_743, panic as panic_751
 } from "@temperlang/core";
-export class NetRequest extends type__736() {
+export class NetRequest extends type__745() {
   /** @type {string} */
-  #url_725;
+  #url_734;
   /** @type {string} */
-  #method_726;
+  #method_735;
   /** @type {string | null} */
-  #bodyContent_727;
+  #bodyContent_736;
   /** @type {string | null} */
-  #bodyMimeType_728;
+  #bodyMimeType_737;
   /**
-   * @param {string} content_730
-   * @param {string} mimeType_731
+   * @param {string} content_739
+   * @param {string} mimeType_740
    */
-  post(content_730, mimeType_731) {
-    this.#method_726 = "POST";
-    this.#bodyContent_727 = content_730;
-    let t_732 = this.#bodyMimeType_728;
-    this.#bodyMimeType_728 = t_732;
+  post(content_739, mimeType_740) {
+    this.#method_735 = "POST";
+    this.#bodyContent_736 = content_739;
+    let t_741 = this.#bodyMimeType_737;
+    this.#bodyMimeType_737 = t_741;
     return;
   }
   /** @returns {globalThis.Promise<NetResponse>} */
   send() {
-    return stdNetSend_734(this.#url_725, this.#method_726, this.#bodyContent_727, this.#bodyMimeType_728);
+    return stdNetSend_743(this.#url_734, this.#method_735, this.#bodyContent_736, this.#bodyMimeType_737);
   }
-  /** @param {string} url_735 */
-  constructor(url_735) {
+  /** @param {string} url_744 */
+  constructor(url_744) {
     super ();
-    this.#url_725 = url_735;
-    this.#method_726 = "GET";
-    this.#bodyContent_727 = null;
-    this.#bodyMimeType_728 = null;
+    this.#url_734 = url_744;
+    this.#method_735 = "GET";
+    this.#bodyContent_736 = null;
+    this.#bodyMimeType_737 = null;
     return;
   }
 };
-export class NetResponse extends type__736() {
+export class NetResponse extends type__745() {
 };
 /**
- * @param {string} url_738
- * @param {string} method_739
- * @param {string | null} bodyContent_740
- * @param {string | null} bodyMimeType_741
+ * @param {string} url_747
+ * @param {string} method_748
+ * @param {string | null} bodyContent_749
+ * @param {string | null} bodyMimeType_750
  * @returns {globalThis.Promise<NetResponse>}
  */
-function sendRequest_737(url_738, method_739, bodyContent_740, bodyMimeType_741) {
-  return panic_742();
+function sendRequest_746(url_747, method_748, bodyContent_749, bodyMimeType_750) {
+  return panic_751();
 }

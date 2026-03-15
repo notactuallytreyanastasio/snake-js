@@ -1,46 +1,46 @@
 import {
-  type as type__753, requireInstanceOf as requireInstanceOf__877, pairConstructor as pairConstructor_831, mapConstructor as mapConstructor_830, regexCompileFormatted as regexCompileFormatted_843, regexCompiledFound as regexCompiledFound_847, regexCompiledFind as regexCompiledFind_852, regexCompiledReplace as regexCompiledReplace_857, regexCompiledSplit as regexCompiledSplit_860, listedGet as listedGet_912, stringFromCodePoint as stringFromCodePoint_914, regexFormatterPushCodeTo as regexFormatterPushCodeTo_915, stringGet as stringGet_923, stringNext as stringNext_924, regexFormatterAdjustCodeSet as regexFormatterAdjustCodeSet_938, listBuilderAdd as listBuilderAdd_1054, listBuilderToList as listBuilderToList_1055
+  type as type__762, requireInstanceOf as requireInstanceOf__886, pairConstructor as pairConstructor_840, mapConstructor as mapConstructor_839, regexCompileFormatted as regexCompileFormatted_852, regexCompiledFound as regexCompiledFound_856, regexCompiledFind as regexCompiledFind_861, regexCompiledReplace as regexCompiledReplace_866, regexCompiledSplit as regexCompiledSplit_869, listedGet as listedGet_921, stringFromCodePoint as stringFromCodePoint_923, regexFormatterPushCodeTo as regexFormatterPushCodeTo_924, stringGet as stringGet_932, stringNext as stringNext_933, regexFormatterAdjustCodeSet as regexFormatterAdjustCodeSet_947, listBuilderAdd as listBuilderAdd_1063, listBuilderToList as listBuilderToList_1064
 } from "@temperlang/core";
-export class RegexNode extends type__753() {
+export class RegexNode extends type__762() {
   /** @returns {Regex} */
   compiled() {
     return new Regex(this);
   }
   /**
-   * @param {string} text_745
+   * @param {string} text_754
    * @returns {boolean}
    */
-  found(text_745) {
-    return this.compiled().found(text_745);
+  found(text_754) {
+    return this.compiled().found(text_754);
   }
   /**
-   * @param {string} text_747
+   * @param {string} text_756
    * @returns {Match}
    */
-  find(text_747) {
-    return this.compiled().find(text_747);
+  find(text_756) {
+    return this.compiled().find(text_756);
   }
   /**
-   * @param {string} text_749
-   * @param {(arg0: Match) => string} format_750
+   * @param {string} text_758
+   * @param {(arg0: Match) => string} format_759
    * @returns {string}
    */
-  replace(text_749, format_750) {
-    return this.compiled().replace(text_749, format_750);
+  replace(text_758, format_759) {
+    return this.compiled().replace(text_758, format_759);
   }
   /**
-   * @param {string} text_752
+   * @param {string} text_761
    * @returns {Array<string>}
    */
-  split(text_752) {
-    return this.compiled().split(text_752);
+  split(text_761) {
+    return this.compiled().split(text_761);
   }
 };
-export class Capture extends type__753(RegexNode) {
+export class Capture extends type__762(RegexNode) {
   /** @type {string} */
-  #name_754;
+  #name_763;
   /** @type {RegexNode} */
-  #item_755;
+  #item_764;
   /**
    * @param {{
    *   name: string, item: RegexNode
@@ -52,49 +52,49 @@ export class Capture extends type__753(RegexNode) {
     return new Capture(props.name, props.item);
   }
   /**
-   * @param {string} name_756
-   * @param {RegexNode} item_757
+   * @param {string} name_765
+   * @param {RegexNode} item_766
    */
-  constructor(name_756, item_757) {
+  constructor(name_765, item_766) {
     super ();
-    this.#name_754 = name_756;
-    this.#item_755 = item_757;
+    this.#name_763 = name_765;
+    this.#item_764 = item_766;
     return;
   }
   /** @returns {string} */
   get name() {
-    return this.#name_754;
+    return this.#name_763;
   }
   /** @returns {RegexNode} */
   get item() {
-    return this.#item_755;
+    return this.#item_764;
   }
 };
-export class CodePart extends type__753(RegexNode) {
+export class CodePart extends type__762(RegexNode) {
 };
-export class CodePoints extends type__753(CodePart) {
+export class CodePoints extends type__762(CodePart) {
   /** @type {string} */
-  #value_760;
-  /** @param {string} value_761 */
-  constructor(value_761) {
+  #value_769;
+  /** @param {string} value_770 */
+  constructor(value_770) {
     super ();
-    this.#value_760 = value_761;
+    this.#value_769 = value_770;
     return;
   }
   /** @returns {string} */
   get value() {
-    return this.#value_760;
+    return this.#value_769;
   }
 };
-export class Special extends type__753(RegexNode) {
+export class Special extends type__762(RegexNode) {
 };
-export class SpecialSet extends type__753(CodePart, Special) {
+export class SpecialSet extends type__762(CodePart, Special) {
 };
-export class CodeRange extends type__753(CodePart) {
+export class CodeRange extends type__762(CodePart) {
   /** @type {number} */
-  #min_763;
+  #min_772;
   /** @type {number} */
-  #max_764;
+  #max_773;
   /**
    * @param {{
    *   min: number, max: number
@@ -106,29 +106,29 @@ export class CodeRange extends type__753(CodePart) {
     return new CodeRange(props.min, props.max);
   }
   /**
-   * @param {number} min_765
-   * @param {number} max_766
+   * @param {number} min_774
+   * @param {number} max_775
    */
-  constructor(min_765, max_766) {
+  constructor(min_774, max_775) {
     super ();
-    this.#min_763 = min_765;
-    this.#max_764 = max_766;
+    this.#min_772 = min_774;
+    this.#max_773 = max_775;
     return;
   }
   /** @returns {number} */
   get min() {
-    return this.#min_763;
+    return this.#min_772;
   }
   /** @returns {number} */
   get max() {
-    return this.#max_764;
+    return this.#max_773;
   }
 };
-export class CodeSet extends type__753(RegexNode) {
+export class CodeSet extends type__762(RegexNode) {
   /** @type {Array<CodePart>} */
-  #items_769;
+  #items_778;
   /** @type {boolean} */
-  #negated_770;
+  #negated_779;
   /**
    * @param {{
    *   items: Array<CodePart>, negated ?: boolean | null
@@ -140,53 +140,53 @@ export class CodeSet extends type__753(RegexNode) {
     return new CodeSet(props.items, props.negated);
   }
   /**
-   * @param {Array<CodePart>} items_771
-   * @param {boolean | null} [negated_772]
+   * @param {Array<CodePart>} items_780
+   * @param {boolean | null} [negated_781]
    */
-  constructor(items_771, negated_772) {
+  constructor(items_780, negated_781) {
     super ();
-    let negated_773;
-    if (negated_772 == null) {
-      negated_773 = false;
+    let negated_782;
+    if (negated_781 == null) {
+      negated_782 = false;
     } else {
-      negated_773 = negated_772;
+      negated_782 = negated_781;
     }
-    this.#items_769 = items_771;
-    this.#negated_770 = negated_773;
+    this.#items_778 = items_780;
+    this.#negated_779 = negated_782;
     return;
   }
   /** @returns {Array<CodePart>} */
   get items() {
-    return this.#items_769;
+    return this.#items_778;
   }
   /** @returns {boolean} */
   get negated() {
-    return this.#negated_770;
+    return this.#negated_779;
   }
 };
-export class Or extends type__753(RegexNode) {
+export class Or extends type__762(RegexNode) {
   /** @type {Array<RegexNode>} */
-  #items_776;
-  /** @param {Array<RegexNode>} items_777 */
-  constructor(items_777) {
+  #items_785;
+  /** @param {Array<RegexNode>} items_786 */
+  constructor(items_786) {
     super ();
-    this.#items_776 = items_777;
+    this.#items_785 = items_786;
     return;
   }
   /** @returns {Array<RegexNode>} */
   get items() {
-    return this.#items_776;
+    return this.#items_785;
   }
 };
-export class Repeat extends type__753(RegexNode) {
+export class Repeat extends type__762(RegexNode) {
   /** @type {RegexNode} */
-  #item_779;
+  #item_788;
   /** @type {number} */
-  #min_780;
+  #min_789;
   /** @type {number | null} */
-  #max_781;
+  #max_790;
   /** @type {boolean} */
-  #reluctant_782;
+  #reluctant_791;
   /**
    * @param {{
    *   item: RegexNode, min: number, max: number | null, reluctant ?: boolean | null
@@ -198,61 +198,61 @@ export class Repeat extends type__753(RegexNode) {
     return new Repeat(props.item, props.min, props.max, props.reluctant);
   }
   /**
-   * @param {RegexNode} item_783
-   * @param {number} min_784
-   * @param {number | null} max_785
-   * @param {boolean | null} [reluctant_786]
+   * @param {RegexNode} item_792
+   * @param {number} min_793
+   * @param {number | null} max_794
+   * @param {boolean | null} [reluctant_795]
    */
-  constructor(item_783, min_784, max_785, reluctant_786) {
+  constructor(item_792, min_793, max_794, reluctant_795) {
     super ();
-    let reluctant_787;
-    if (reluctant_786 == null) {
-      reluctant_787 = false;
+    let reluctant_796;
+    if (reluctant_795 == null) {
+      reluctant_796 = false;
     } else {
-      reluctant_787 = reluctant_786;
+      reluctant_796 = reluctant_795;
     }
-    this.#item_779 = item_783;
-    this.#min_780 = min_784;
-    this.#max_781 = max_785;
-    this.#reluctant_782 = reluctant_787;
+    this.#item_788 = item_792;
+    this.#min_789 = min_793;
+    this.#max_790 = max_794;
+    this.#reluctant_791 = reluctant_796;
     return;
   }
   /** @returns {RegexNode} */
   get item() {
-    return this.#item_779;
+    return this.#item_788;
   }
   /** @returns {number} */
   get min() {
-    return this.#min_780;
+    return this.#min_789;
   }
   /** @returns {number | null} */
   get max() {
-    return this.#max_781;
+    return this.#max_790;
   }
   /** @returns {boolean} */
   get reluctant() {
-    return this.#reluctant_782;
+    return this.#reluctant_791;
   }
 };
-export class Sequence extends type__753(RegexNode) {
+export class Sequence extends type__762(RegexNode) {
   /** @type {Array<RegexNode>} */
-  #items_792;
-  /** @param {Array<RegexNode>} items_793 */
-  constructor(items_793) {
+  #items_801;
+  /** @param {Array<RegexNode>} items_802 */
+  constructor(items_802) {
     super ();
-    this.#items_792 = items_793;
+    this.#items_801 = items_802;
     return;
   }
   /** @returns {Array<RegexNode>} */
   get items() {
-    return this.#items_792;
+    return this.#items_801;
   }
 };
-export class Match extends type__753() {
+export class Match extends type__762() {
   /** @type {Group} */
-  #full_795;
+  #full_804;
   /** @type {Map<string, Group>} */
-  #groups_796;
+  #groups_805;
   /**
    * @param {{
    *   full: Group, groups: Map<string, Group>
@@ -264,33 +264,33 @@ export class Match extends type__753() {
     return new Match(props.full, props.groups);
   }
   /**
-   * @param {Group} full_797
-   * @param {Map<string, Group>} groups_798
+   * @param {Group} full_806
+   * @param {Map<string, Group>} groups_807
    */
-  constructor(full_797, groups_798) {
+  constructor(full_806, groups_807) {
     super ();
-    this.#full_795 = full_797;
-    this.#groups_796 = groups_798;
+    this.#full_804 = full_806;
+    this.#groups_805 = groups_807;
     return;
   }
   /** @returns {Group} */
   get full() {
-    return this.#full_795;
+    return this.#full_804;
   }
   /** @returns {Map<string, Group>} */
   get groups() {
-    return this.#groups_796;
+    return this.#groups_805;
   }
 };
-export class Group extends type__753() {
+export class Group extends type__762() {
   /** @type {string} */
-  #name_801;
+  #name_810;
   /** @type {string} */
-  #value_802;
+  #value_811;
   /** @type {globalThis.number} */
-  #begin_803;
+  #begin_812;
   /** @type {globalThis.number} */
-  #end_804;
+  #end_813;
   /**
    * @param {{
    *   name: string, value: string, begin: globalThis.number, end: globalThis.number
@@ -302,881 +302,872 @@ export class Group extends type__753() {
     return new Group(props.name, props.value, props.begin, props.end);
   }
   /**
-   * @param {string} name_805
-   * @param {string} value_806
-   * @param {globalThis.number} begin_807
-   * @param {globalThis.number} end_808
+   * @param {string} name_814
+   * @param {string} value_815
+   * @param {globalThis.number} begin_816
+   * @param {globalThis.number} end_817
    */
-  constructor(name_805, value_806, begin_807, end_808) {
+  constructor(name_814, value_815, begin_816, end_817) {
     super ();
-    this.#name_801 = name_805;
-    this.#value_802 = value_806;
-    this.#begin_803 = begin_807;
-    this.#end_804 = end_808;
+    this.#name_810 = name_814;
+    this.#value_811 = value_815;
+    this.#begin_812 = begin_816;
+    this.#end_813 = end_817;
     return;
   }
   /** @returns {string} */
   get name() {
-    return this.#name_801;
+    return this.#name_810;
   }
   /** @returns {string} */
   get value() {
-    return this.#value_802;
+    return this.#value_811;
   }
   /** @returns {globalThis.number} */
   get begin() {
-    return this.#begin_803;
+    return this.#begin_812;
   }
   /** @returns {globalThis.number} */
   get end() {
-    return this.#end_804;
+    return this.#end_813;
   }
 };
-class RegexRefs_813 extends type__753() {
+class RegexRefs_822 extends type__762() {
   /** @type {CodePoints} */
-  #codePoints_814;
+  #codePoints_823;
   /** @type {Group} */
-  #group_815;
+  #group_824;
   /** @type {Match} */
-  #match_816;
+  #match_825;
   /** @type {Or} */
-  #orObject_817;
+  #orObject_826;
   /**
    * @param {{
    *   codePoints ?: CodePoints | null, group ?: Group | null, match ?: Match | null, orObject ?: Or | null
    * }}
    * props
-   * @returns {RegexRefs_813}
+   * @returns {RegexRefs_822}
    */
   static["new"](props) {
-    return new RegexRefs_813(props.codePoints, props.group, props.match, props.orObject);
+    return new RegexRefs_822(props.codePoints, props.group, props.match, props.orObject);
   }
   /**
-   * @param {CodePoints | null} [codePoints_818]
-   * @param {Group | null} [group_819]
-   * @param {Match | null} [match_820]
-   * @param {Or | null} [orObject_821]
+   * @param {CodePoints | null} [codePoints_827]
+   * @param {Group | null} [group_828]
+   * @param {Match | null} [match_829]
+   * @param {Or | null} [orObject_830]
    */
-  constructor(codePoints_818, group_819, match_820, orObject_821) {
+  constructor(codePoints_827, group_828, match_829, orObject_830) {
     super ();
-    let t_822;
-    let t_823;
-    let t_824;
-    let t_825;
-    let t_826;
-    let codePoints_827;
-    if (codePoints_818 == null) {
-      t_822 = new CodePoints("");
-      codePoints_827 = t_822;
+    let t_831;
+    let t_832;
+    let t_833;
+    let t_834;
+    let t_835;
+    let codePoints_836;
+    if (codePoints_827 == null) {
+      t_831 = new CodePoints("");
+      codePoints_836 = t_831;
     } else {
-      codePoints_827 = codePoints_818;
+      codePoints_836 = codePoints_827;
     }
-    let group_828;
-    if (group_819 == null) {
-      t_823 = new Group("", "", 0, 0);
-      group_828 = t_823;
+    let group_837;
+    if (group_828 == null) {
+      t_832 = new Group("", "", 0, 0);
+      group_837 = t_832;
     } else {
-      group_828 = group_819;
+      group_837 = group_828;
     }
-    let match_829;
-    if (match_820 == null) {
-      t_824 = mapConstructor_830(Object.freeze([pairConstructor_831("", group_828)]));
-      t_825 = new Match(group_828, t_824);
-      match_829 = t_825;
+    let match_838;
+    if (match_829 == null) {
+      t_833 = mapConstructor_839(Object.freeze([pairConstructor_840("", group_837)]));
+      t_834 = new Match(group_837, t_833);
+      match_838 = t_834;
     } else {
-      match_829 = match_820;
+      match_838 = match_829;
     }
-    let orObject_832;
-    if (orObject_821 == null) {
-      t_826 = new Or(Object.freeze([]));
-      orObject_832 = t_826;
+    let orObject_841;
+    if (orObject_830 == null) {
+      t_835 = new Or(Object.freeze([]));
+      orObject_841 = t_835;
     } else {
-      orObject_832 = orObject_821;
+      orObject_841 = orObject_830;
     }
-    this.#codePoints_814 = codePoints_827;
-    this.#group_815 = group_828;
-    this.#match_816 = match_829;
-    this.#orObject_817 = orObject_832;
+    this.#codePoints_823 = codePoints_836;
+    this.#group_824 = group_837;
+    this.#match_825 = match_838;
+    this.#orObject_826 = orObject_841;
     return;
   }
   /** @returns {CodePoints} */
   get codePoints() {
-    return this.#codePoints_814;
+    return this.#codePoints_823;
   }
   /** @returns {Group} */
   get group() {
-    return this.#group_815;
+    return this.#group_824;
   }
   /** @returns {Match} */
   get match() {
-    return this.#match_816;
+    return this.#match_825;
   }
   /** @returns {Or} */
   get orObject() {
-    return this.#orObject_817;
+    return this.#orObject_826;
   }
 }
-export class Regex extends type__753() {
+export class Regex extends type__762() {
   /** @type {RegexNode} */
-  #data_837;
-  /** @param {RegexNode} data_838 */
-  constructor(data_838) {
+  #data_846;
+  /** @param {RegexNode} data_847 */
+  constructor(data_847) {
     super ();
-    const t_839 = data_838;
-    this.#data_837 = t_839;
-    const formatted_840 = RegexFormatter_841.regexFormat(data_838);
-    let t_842 = regexCompileFormatted_843(data_838, formatted_840);
-    this.#compiled_844 = t_842;
+    const t_848 = data_847;
+    this.#data_846 = t_848;
+    const formatted_849 = RegexFormatter_850.regexFormat(data_847);
+    let t_851 = regexCompileFormatted_852(data_847, formatted_849);
+    this.#compiled_853 = t_851;
     return;
-  }
-  /**
-   * @param {string} text_846
-   * @returns {boolean}
-   */
-  found(text_846) {
-    return regexCompiledFound_847(this, this.#compiled_844, text_846);
-  }
-  /**
-   * @param {string} text_849
-   * @param {globalThis.number | null} [begin_850]
-   * @returns {Match}
-   */
-  find(text_849, begin_850) {
-    let begin_851;
-    if (begin_850 == null) {
-      begin_851 = 0;
-    } else {
-      begin_851 = begin_850;
-    }
-    return regexCompiledFind_852(this, this.#compiled_844, text_849, begin_851, regexRefs_853);
   }
   /**
    * @param {string} text_855
-   * @param {(arg0: Match) => string} format_856
-   * @returns {string}
+   * @returns {boolean}
    */
-  replace(text_855, format_856) {
-    return regexCompiledReplace_857(this, this.#compiled_844, text_855, format_856, regexRefs_853);
+  found(text_855) {
+    return regexCompiledFound_856(this, this.#compiled_853, text_855);
   }
   /**
-   * @param {string} text_859
+   * @param {string} text_858
+   * @param {globalThis.number | null} [begin_859]
+   * @returns {Match}
+   */
+  find(text_858, begin_859) {
+    let begin_860;
+    if (begin_859 == null) {
+      begin_860 = 0;
+    } else {
+      begin_860 = begin_859;
+    }
+    return regexCompiledFind_861(this, this.#compiled_853, text_858, begin_860, regexRefs_862);
+  }
+  /**
+   * @param {string} text_864
+   * @param {(arg0: Match) => string} format_865
+   * @returns {string}
+   */
+  replace(text_864, format_865) {
+    return regexCompiledReplace_866(this, this.#compiled_853, text_864, format_865, regexRefs_862);
+  }
+  /**
+   * @param {string} text_868
    * @returns {Array<string>}
    */
-  split(text_859) {
-    return regexCompiledSplit_860(this, this.#compiled_844, text_859, regexRefs_853);
+  split(text_868) {
+    return regexCompiledSplit_869(this, this.#compiled_853, text_868, regexRefs_862);
   }
   /** @type {unknown} */
-  #compiled_844;
+  #compiled_853;
   /** @returns {RegexNode} */
   get data() {
-    return this.#data_837;
+    return this.#data_846;
   }
 };
-class RegexFormatter_841 extends type__753() {
+class RegexFormatter_850 extends type__762() {
   /** @type {globalThis.Array<string>} */
-  #out_862;
+  #out_871;
   /**
-   * @param {RegexNode} data_864
+   * @param {RegexNode} data_873
    * @returns {string}
    */
-  static regexFormat(data_864) {
-    return new RegexFormatter_841().format(data_864);
+  static regexFormat(data_873) {
+    return new RegexFormatter_850().format(data_873);
   }
   /**
-   * @param {RegexNode} regex_866
+   * @param {RegexNode} regex_875
    * @returns {string}
    */
-  format(regex_866) {
-    this.#pushRegex_867(regex_866);
-    return this.#out_862[0];
+  format(regex_875) {
+    this.#pushRegex_876(regex_875);
+    return this.#out_871[0];
   }
-  /** @param {RegexNode} regex_869 */
-  #pushRegex_867(regex_869) {
-    let t_870;
-    let t_871;
-    let t_872;
-    let t_873;
-    let t_874;
-    let t_875;
-    let t_876;
-    if (regex_869 instanceof Capture) {
-      t_870 = requireInstanceOf__877(regex_869, Capture);
-      this.#pushCapture_878(t_870);
-    } else if (regex_869 instanceof CodePoints) {
-      t_871 = requireInstanceOf__877(regex_869, CodePoints);
-      this.#pushCodePoints_879(t_871, false);
-    } else if (regex_869 instanceof CodeRange) {
-      t_872 = requireInstanceOf__877(regex_869, CodeRange);
-      this.#pushCodeRange_880(t_872);
-    } else if (regex_869 instanceof CodeSet) {
-      t_873 = requireInstanceOf__877(regex_869, CodeSet);
-      this.#pushCodeSet_881(t_873);
-    } else if (regex_869 instanceof Or) {
-      t_874 = requireInstanceOf__877(regex_869, Or);
-      this.#pushOr_882(t_874);
-    } else if (regex_869 instanceof Repeat) {
-      t_875 = requireInstanceOf__877(regex_869, Repeat);
-      this.#pushRepeat_883(t_875);
-    } else if (regex_869 instanceof Sequence) {
-      t_876 = requireInstanceOf__877(regex_869, Sequence);
-      this.#pushSequence_884(t_876);
-    } else if (Object.is(regex_869, Begin)) {
-      this.#out_862[0] += "^";
-    } else if (Object.is(regex_869, Dot)) {
-      this.#out_862[0] += ".";
-    } else if (Object.is(regex_869, End)) {
-      this.#out_862[0] += "$";
-    } else if (Object.is(regex_869, WordBoundary)) {
-      this.#out_862[0] += "\\b";
-    } else if (Object.is(regex_869, Digit)) {
-      this.#out_862[0] += "\\d";
-    } else if (Object.is(regex_869, Space)) {
-      this.#out_862[0] += "\\s";
-    } else if (Object.is(regex_869, Word)) {
-      this.#out_862[0] += "\\w";
+  /** @param {RegexNode} regex_878 */
+  #pushRegex_876(regex_878) {
+    let t_879;
+    let t_880;
+    let t_881;
+    let t_882;
+    let t_883;
+    let t_884;
+    let t_885;
+    if (regex_878 instanceof Capture) {
+      t_879 = requireInstanceOf__886(regex_878, Capture);
+      this.#pushCapture_887(t_879);
+    } else if (regex_878 instanceof CodePoints) {
+      t_880 = requireInstanceOf__886(regex_878, CodePoints);
+      this.#pushCodePoints_888(t_880, false);
+    } else if (regex_878 instanceof CodeRange) {
+      t_881 = requireInstanceOf__886(regex_878, CodeRange);
+      this.#pushCodeRange_889(t_881);
+    } else if (regex_878 instanceof CodeSet) {
+      t_882 = requireInstanceOf__886(regex_878, CodeSet);
+      this.#pushCodeSet_890(t_882);
+    } else if (regex_878 instanceof Or) {
+      t_883 = requireInstanceOf__886(regex_878, Or);
+      this.#pushOr_891(t_883);
+    } else if (regex_878 instanceof Repeat) {
+      t_884 = requireInstanceOf__886(regex_878, Repeat);
+      this.#pushRepeat_892(t_884);
+    } else if (regex_878 instanceof Sequence) {
+      t_885 = requireInstanceOf__886(regex_878, Sequence);
+      this.#pushSequence_893(t_885);
+    } else if (Object.is(regex_878, Begin)) {
+      this.#out_871[0] += "^";
+    } else if (Object.is(regex_878, Dot)) {
+      this.#out_871[0] += ".";
+    } else if (Object.is(regex_878, End)) {
+      this.#out_871[0] += "$";
+    } else if (Object.is(regex_878, WordBoundary)) {
+      this.#out_871[0] += "\\b";
+    } else if (Object.is(regex_878, Digit)) {
+      this.#out_871[0] += "\\d";
+    } else if (Object.is(regex_878, Space)) {
+      this.#out_871[0] += "\\s";
+    } else if (Object.is(regex_878, Word)) {
+      this.#out_871[0] += "\\w";
     }
     return;
   }
-  /** @param {Capture} capture_886 */
-  #pushCapture_878(capture_886) {
-    this.#out_862[0] += "(";
-    let t_887 = this.#out_862;
-    let t_888 = capture_886.name;
-    this.#pushCaptureName_889(t_887, t_888);
-    let t_890 = capture_886.item;
-    this.#pushRegex_867(t_890);
-    this.#out_862[0] += ")";
+  /** @param {Capture} capture_895 */
+  #pushCapture_887(capture_895) {
+    this.#out_871[0] += "(";
+    let t_896 = this.#out_871;
+    let t_897 = capture_895.name;
+    this.#pushCaptureName_898(t_896, t_897);
+    let t_899 = capture_895.item;
+    this.#pushRegex_876(t_899);
+    this.#out_871[0] += ")";
     return;
   }
   /**
-   * @param {globalThis.Array<string>} out_892
-   * @param {string} name_893
+   * @param {globalThis.Array<string>} out_901
+   * @param {string} name_902
    */
-  #pushCaptureName_889(out_892, name_893) {
-    out_892[0] += "?<" + name_893 + ">";
+  #pushCaptureName_898(out_901, name_902) {
+    out_901[0] += "?<" + name_902 + ">";
     return;
   }
   /**
-   * @param {number} code_896
-   * @param {boolean} insideCodeSet_897
+   * @param {number} code_905
+   * @param {boolean} insideCodeSet_906
    */
-  #pushCode_895(code_896, insideCodeSet_897) {
-    let return_898;
-    let t_899;
-    let t_900;
-    let t_901;
-    let t_902;
-    let t_903;
-    let t_904;
-    let t_905;
-    let t_906;
-    let t_907;
-    fn_908: {
+  #pushCode_904(code_905, insideCodeSet_906) {
+    let return_907;
+    let t_908;
+    let t_909;
+    let t_910;
+    let t_911;
+    let t_912;
+    let t_913;
+    let t_914;
+    let t_915;
+    let t_916;
+    fn_917: {
       try {
-        let specialEscape_909;
-        if (code_896 === Codes_910.carriageReturn) {
-          specialEscape_909 = "r";
-        } else if (code_896 === Codes_910.newline) {
-          specialEscape_909 = "n";
-        } else if (code_896 === Codes_910.tab) {
-          specialEscape_909 = "t";
+        let specialEscape_918;
+        if (code_905 === Codes_919.carriageReturn) {
+          specialEscape_918 = "r";
+        } else if (code_905 === Codes_919.newline) {
+          specialEscape_918 = "n";
+        } else if (code_905 === Codes_919.tab) {
+          specialEscape_918 = "t";
         } else {
-          specialEscape_909 = "";
+          specialEscape_918 = "";
         }
-        if (specialEscape_909 !== "") {
-          this.#out_862[0] += "\\";
-          this.#out_862[0] += specialEscape_909;
-          return_898 = void 0;
-          break fn_908;
+        if (specialEscape_918 !== "") {
+          this.#out_871[0] += "\\";
+          this.#out_871[0] += specialEscape_918;
+          return_907 = void 0;
+          break fn_917;
         }
-        if (code_896 <= 127) {
-          const escapeNeed_911 = listedGet_912(escapeNeeds_913, code_896);
-          if (Object.is(escapeNeed_911, 2)) {
-            t_900 = true;
+        if (code_905 <= 127) {
+          const escapeNeed_920 = listedGet_921(escapeNeeds_922, code_905);
+          if (Object.is(escapeNeed_920, 2)) {
+            t_909 = true;
           } else {
-            if (insideCodeSet_897) {
-              t_899 = code_896 === Codes_910.dash;
+            if (insideCodeSet_906) {
+              t_908 = code_905 === Codes_919.dash;
             } else {
-              t_899 = false;
+              t_908 = false;
             }
-            t_900 = t_899;
+            t_909 = t_908;
           }
-          if (t_900) {
-            this.#out_862[0] += "\\";
-            t_901 = stringFromCodePoint_914(code_896);
-            this.#out_862[0] += t_901;
-            return_898 = void 0;
-            break fn_908;
-          } else if (Object.is(escapeNeed_911, 0)) {
-            t_902 = stringFromCodePoint_914(code_896);
-            this.#out_862[0] += t_902;
-            return_898 = void 0;
-            break fn_908;
+          if (t_909) {
+            this.#out_871[0] += "\\";
+            t_910 = stringFromCodePoint_923(code_905);
+            this.#out_871[0] += t_910;
+            return_907 = void 0;
+            break fn_917;
+          } else if (Object.is(escapeNeed_920, 0)) {
+            t_911 = stringFromCodePoint_923(code_905);
+            this.#out_871[0] += t_911;
+            return_907 = void 0;
+            break fn_917;
           }
         }
-        if (code_896 >= Codes_910.supplementalMin) {
-          t_906 = true;
+        if (code_905 >= Codes_919.supplementalMin) {
+          t_915 = true;
         } else {
-          if (code_896 > Codes_910.highControlMax) {
-            if (Codes_910.surrogateMin <= code_896) {
-              t_903 = code_896 <= Codes_910.surrogateMax;
+          if (code_905 > Codes_919.highControlMax) {
+            if (Codes_919.surrogateMin <= code_905) {
+              t_912 = code_905 <= Codes_919.surrogateMax;
             } else {
-              t_903 = false;
+              t_912 = false;
             }
-            if (t_903) {
-              t_904 = true;
+            if (t_912) {
+              t_913 = true;
             } else {
-              t_904 = code_896 === Codes_910.uint16Max;
+              t_913 = code_905 === Codes_919.uint16Max;
             }
-            t_905 = ! t_904;
+            t_914 = ! t_913;
           } else {
-            t_905 = false;
+            t_914 = false;
           }
-          t_906 = t_905;
+          t_915 = t_914;
         }
-        if (t_906) {
-          t_907 = stringFromCodePoint_914(code_896);
-          this.#out_862[0] += t_907;
+        if (t_915) {
+          t_916 = stringFromCodePoint_923(code_905);
+          this.#out_871[0] += t_916;
         } else {
-          regexFormatterPushCodeTo_915(this, this.#out_862, code_896, insideCodeSet_897);
+          regexFormatterPushCodeTo_924(this, this.#out_871, code_905, insideCodeSet_906);
         }
       } catch {
         throw Error();
       }
-      return_898 = void 0;
+      return_907 = void 0;
     }
-    return return_898;
+    return return_907;
   }
   /**
-   * @param {CodePoints} codePoints_917
-   * @param {boolean} insideCodeSet_918
+   * @param {CodePoints} codePoints_926
+   * @param {boolean} insideCodeSet_927
    */
-  #pushCodePoints_879(codePoints_917, insideCodeSet_918) {
-    let t_919;
-    let t_920;
-    const value_921 = codePoints_917.value;
-    let index_922 = 0;
+  #pushCodePoints_888(codePoints_926, insideCodeSet_927) {
+    let t_928;
+    let t_929;
+    const value_930 = codePoints_926.value;
+    let index_931 = 0;
     while (true) {
-      if (!(value_921.length > index_922)) {
+      if (!(value_930.length > index_931)) {
         break;
       }
-      t_919 = stringGet_923(value_921, index_922);
-      this.#pushCode_895(t_919, insideCodeSet_918);
-      t_920 = stringNext_924(value_921, index_922);
-      index_922 = t_920;
+      t_928 = stringGet_932(value_930, index_931);
+      this.#pushCode_904(t_928, insideCodeSet_927);
+      t_929 = stringNext_933(value_930, index_931);
+      index_931 = t_929;
     }
     return;
   }
-  /** @param {CodeRange} codeRange_926 */
-  #pushCodeRange_880(codeRange_926) {
-    this.#out_862[0] += "[";
-    this.#pushCodeRangeUnwrapped_927(codeRange_926);
-    this.#out_862[0] += "]";
+  /** @param {CodeRange} codeRange_935 */
+  #pushCodeRange_889(codeRange_935) {
+    this.#out_871[0] += "[";
+    this.#pushCodeRangeUnwrapped_936(codeRange_935);
+    this.#out_871[0] += "]";
     return;
   }
-  /** @param {CodeRange} codeRange_929 */
-  #pushCodeRangeUnwrapped_927(codeRange_929) {
-    let t_930 = codeRange_929.min;
-    this.#pushCode_895(t_930, true);
-    this.#out_862[0] += "-";
-    let t_931 = codeRange_929.max;
-    this.#pushCode_895(t_931, true);
+  /** @param {CodeRange} codeRange_938 */
+  #pushCodeRangeUnwrapped_936(codeRange_938) {
+    let t_939 = codeRange_938.min;
+    this.#pushCode_904(t_939, true);
+    this.#out_871[0] += "-";
+    let t_940 = codeRange_938.max;
+    this.#pushCode_904(t_940, true);
     return;
   }
-  /** @param {CodeSet} codeSet_933 */
-  #pushCodeSet_881(codeSet_933) {
-    let t_934;
-    let t_935;
-    let t_936;
-    const adjusted_937 = regexFormatterAdjustCodeSet_938(this, codeSet_933, regexRefs_853);
-    if (adjusted_937 instanceof CodeSet) {
-      t_936 = requireInstanceOf__877(adjusted_937, CodeSet);
-      if (! t_936.items.length) {
-        if (t_936.negated) {
-          this.#out_862[0] += "[\\s\\S]";
-        } else {
-          this.#out_862[0] += "(?:$.)";
-        }
-      } else {
-        this.#out_862[0] += "[";
-        if (t_936.negated) {
-          this.#out_862[0] += "^";
-        }
-        let i_939 = 0;
-        while (true) {
-          t_934 = t_936.items.length;
-          if (!(i_939 < t_934)) {
-            break;
-          }
-          t_935 = listedGet_912(t_936.items, i_939);
-          this.#pushCodeSetItem_940(t_935);
-          i_939 = i_939 + 1 | 0;
-        }
-        this.#out_862[0] += "]";
-      }
-    } else {
-      this.#pushRegex_867(adjusted_937);
-    }
-    return;
-  }
-  /** @param {CodePart} codePart_942 */
-  #pushCodeSetItem_940(codePart_942) {
+  /** @param {CodeSet} codeSet_942 */
+  #pushCodeSet_890(codeSet_942) {
     let t_943;
     let t_944;
     let t_945;
-    if (codePart_942 instanceof CodePoints) {
-      t_943 = requireInstanceOf__877(codePart_942, CodePoints);
-      this.#pushCodePoints_879(t_943, true);
-    } else if (codePart_942 instanceof CodeRange) {
-      t_944 = requireInstanceOf__877(codePart_942, CodeRange);
-      this.#pushCodeRangeUnwrapped_927(t_944);
-    } else if (codePart_942 instanceof SpecialSet) {
-      t_945 = requireInstanceOf__877(codePart_942, SpecialSet);
-      this.#pushRegex_867(t_945);
-    }
-    return;
-  }
-  /** @param {Or} or_947 */
-  #pushOr_882(or_947) {
-    let t_948;
-    let t_949;
-    let t_950;
-    if (! ! or_947.items.length) {
-      this.#out_862[0] += "(?:";
-      t_948 = listedGet_912(or_947.items, 0);
-      this.#pushRegex_867(t_948);
-      let i_951 = 1;
-      while (true) {
-        t_949 = or_947.items.length;
-        if (!(i_951 < t_949)) {
-          break;
+    const adjusted_946 = regexFormatterAdjustCodeSet_947(this, codeSet_942, regexRefs_862);
+    if (adjusted_946 instanceof CodeSet) {
+      t_945 = requireInstanceOf__886(adjusted_946, CodeSet);
+      if (! t_945.items.length) {
+        if (t_945.negated) {
+          this.#out_871[0] += "[\\s\\S]";
+        } else {
+          this.#out_871[0] += "(?:$.)";
         }
-        this.#out_862[0] += "|";
-        t_950 = listedGet_912(or_947.items, i_951);
-        this.#pushRegex_867(t_950);
-        i_951 = i_951 + 1 | 0;
+      } else {
+        this.#out_871[0] += "[";
+        if (t_945.negated) {
+          this.#out_871[0] += "^";
+        }
+        let i_948 = 0;
+        while (true) {
+          t_943 = t_945.items.length;
+          if (!(i_948 < t_943)) {
+            break;
+          }
+          t_944 = listedGet_921(t_945.items, i_948);
+          this.#pushCodeSetItem_949(t_944);
+          i_948 = i_948 + 1 | 0;
+        }
+        this.#out_871[0] += "]";
       }
-      this.#out_862[0] += ")";
+    } else {
+      this.#pushRegex_876(adjusted_946);
     }
     return;
   }
-  /** @param {Repeat} repeat_953 */
-  #pushRepeat_883(repeat_953) {
+  /** @param {CodePart} codePart_951 */
+  #pushCodeSetItem_949(codePart_951) {
+    let t_952;
+    let t_953;
     let t_954;
-    let t_955;
-    let t_956;
+    if (codePart_951 instanceof CodePoints) {
+      t_952 = requireInstanceOf__886(codePart_951, CodePoints);
+      this.#pushCodePoints_888(t_952, true);
+    } else if (codePart_951 instanceof CodeRange) {
+      t_953 = requireInstanceOf__886(codePart_951, CodeRange);
+      this.#pushCodeRangeUnwrapped_936(t_953);
+    } else if (codePart_951 instanceof SpecialSet) {
+      t_954 = requireInstanceOf__886(codePart_951, SpecialSet);
+      this.#pushRegex_876(t_954);
+    }
+    return;
+  }
+  /** @param {Or} or_956 */
+  #pushOr_891(or_956) {
     let t_957;
     let t_958;
-    this.#out_862[0] += "(?:";
-    let t_959 = repeat_953.item;
-    this.#pushRegex_867(t_959);
-    this.#out_862[0] += ")";
-    const min_960 = repeat_953.min;
-    const max_961 = repeat_953.max;
-    if (min_960 === 0) {
-      t_956 = max_961 === 1;
-    } else {
-      t_956 = false;
-    }
-    if (t_956) {
-      this.#out_862[0] += "?";
-    } else {
-      if (min_960 === 0) {
-        t_957 = max_961 == null;
-      } else {
-        t_957 = false;
-      }
-      if (t_957) {
-        this.#out_862[0] += "*";
-      } else {
-        if (min_960 === 1) {
-          t_958 = max_961 == null;
-        } else {
-          t_958 = false;
+    let t_959;
+    if (! ! or_956.items.length) {
+      this.#out_871[0] += "(?:";
+      t_957 = listedGet_921(or_956.items, 0);
+      this.#pushRegex_876(t_957);
+      let i_960 = 1;
+      while (true) {
+        t_958 = or_956.items.length;
+        if (!(i_960 < t_958)) {
+          break;
         }
-        if (t_958) {
-          this.#out_862[0] += "+";
-        } else {
-          t_954 = min_960.toString();
-          this.#out_862[0] += "{" + t_954;
-          if (min_960 !== max_961) {
-            this.#out_862[0] += ",";
-            if (!(max_961 == null)) {
-              t_955 = max_961.toString();
-              this.#out_862[0] += t_955;
-            }
-          }
-          this.#out_862[0] += "}";
-        }
+        this.#out_871[0] += "|";
+        t_959 = listedGet_921(or_956.items, i_960);
+        this.#pushRegex_876(t_959);
+        i_960 = i_960 + 1 | 0;
       }
-    }
-    if (repeat_953.reluctant) {
-      this.#out_862[0] += "?";
+      this.#out_871[0] += ")";
     }
     return;
   }
-  /** @param {Sequence} sequence_963 */
-  #pushSequence_884(sequence_963) {
+  /** @param {Repeat} repeat_962 */
+  #pushRepeat_892(repeat_962) {
+    let t_963;
     let t_964;
     let t_965;
-    let i_966 = 0;
+    let t_966;
+    let t_967;
+    this.#out_871[0] += "(?:";
+    let t_968 = repeat_962.item;
+    this.#pushRegex_876(t_968);
+    this.#out_871[0] += ")";
+    const min_969 = repeat_962.min;
+    const max_970 = repeat_962.max;
+    if (min_969 === 0) {
+      t_965 = max_970 === 1;
+    } else {
+      t_965 = false;
+    }
+    if (t_965) {
+      this.#out_871[0] += "?";
+    } else {
+      if (min_969 === 0) {
+        t_966 = max_970 == null;
+      } else {
+        t_966 = false;
+      }
+      if (t_966) {
+        this.#out_871[0] += "*";
+      } else {
+        if (min_969 === 1) {
+          t_967 = max_970 == null;
+        } else {
+          t_967 = false;
+        }
+        if (t_967) {
+          this.#out_871[0] += "+";
+        } else {
+          t_963 = min_969.toString();
+          this.#out_871[0] += "{" + t_963;
+          if (min_969 !== max_970) {
+            this.#out_871[0] += ",";
+            if (!(max_970 == null)) {
+              t_964 = max_970.toString();
+              this.#out_871[0] += t_964;
+            }
+          }
+          this.#out_871[0] += "}";
+        }
+      }
+    }
+    if (repeat_962.reluctant) {
+      this.#out_871[0] += "?";
+    }
+    return;
+  }
+  /** @param {Sequence} sequence_972 */
+  #pushSequence_893(sequence_972) {
+    let t_973;
+    let t_974;
+    let i_975 = 0;
     while (true) {
-      t_964 = sequence_963.items.length;
-      if (!(i_966 < t_964)) {
+      t_973 = sequence_972.items.length;
+      if (!(i_975 < t_973)) {
         break;
       }
-      t_965 = listedGet_912(sequence_963.items, i_966);
-      this.#pushRegex_867(t_965);
-      i_966 = i_966 + 1 | 0;
+      t_974 = listedGet_921(sequence_972.items, i_975);
+      this.#pushRegex_876(t_974);
+      i_975 = i_975 + 1 | 0;
     }
     return;
   }
   /**
-   * @param {CodePart} codePart_968
+   * @param {CodePart} codePart_977
    * @returns {number | null}
    */
-  maxCode(codePart_968) {
-    let return_969;
-    let t_970;
-    let t_971;
-    if (codePart_968 instanceof CodePoints) {
-      t_971 = requireInstanceOf__877(codePart_968, CodePoints);
-      const value_972 = t_971.value;
-      if (! value_972) {
-        return_969 = null;
+  maxCode(codePart_977) {
+    let return_978;
+    let t_979;
+    let t_980;
+    if (codePart_977 instanceof CodePoints) {
+      t_980 = requireInstanceOf__886(codePart_977, CodePoints);
+      const value_981 = t_980.value;
+      if (! value_981) {
+        return_978 = null;
       } else {
-        let max_973 = 0;
-        let index_974 = 0;
+        let max_982 = 0;
+        let index_983 = 0;
         while (true) {
-          if (!(value_972.length > index_974)) {
+          if (!(value_981.length > index_983)) {
             break;
           }
-          const next_975 = stringGet_923(value_972, index_974);
-          if (next_975 > max_973) {
-            max_973 = next_975;
+          const next_984 = stringGet_932(value_981, index_983);
+          if (next_984 > max_982) {
+            max_982 = next_984;
           }
-          t_970 = stringNext_924(value_972, index_974);
-          index_974 = t_970;
+          t_979 = stringNext_933(value_981, index_983);
+          index_983 = t_979;
         }
-        return_969 = max_973;
+        return_978 = max_982;
       }
-    } else if (codePart_968 instanceof CodeRange) {
-      return_969 = requireInstanceOf__877(codePart_968, CodeRange).max;
-    } else if (Object.is(codePart_968, Digit)) {
-      return_969 = Codes_910.digit9;
-    } else if (Object.is(codePart_968, Space)) {
-      return_969 = Codes_910.space;
-    } else if (Object.is(codePart_968, Word)) {
-      return_969 = Codes_910.lowerZ;
+    } else if (codePart_977 instanceof CodeRange) {
+      return_978 = requireInstanceOf__886(codePart_977, CodeRange).max;
+    } else if (Object.is(codePart_977, Digit)) {
+      return_978 = Codes_919.digit9;
+    } else if (Object.is(codePart_977, Space)) {
+      return_978 = Codes_919.space;
+    } else if (Object.is(codePart_977, Word)) {
+      return_978 = Codes_919.lowerZ;
     } else {
-      return_969 = null;
+      return_978 = null;
     }
-    return return_969;
+    return return_978;
   }
   constructor() {
     super ();
-    let t_976 = [""];
-    this.#out_862 = t_976;
+    let t_985 = [""];
+    this.#out_871 = t_985;
     return;
   }
 }
-class Codes_910 extends type__753() {
+class Codes_919 extends type__762() {
   /** @type {number} */
-  static #ampersand_977 = 38;
+  static #ampersand_986 = 38;
   /** @returns {number} */
   static get ampersand() {
-    return this.#ampersand_977;
+    return this.#ampersand_986;
   }
   /** @type {number} */
-  static #backslash_978 = 92;
+  static #backslash_987 = 92;
   /** @returns {number} */
   static get backslash() {
-    return this.#backslash_978;
+    return this.#backslash_987;
   }
   /** @type {number} */
-  static #caret_979 = 94;
+  static #caret_988 = 94;
   /** @returns {number} */
   static get caret() {
-    return this.#caret_979;
+    return this.#caret_988;
   }
   /** @type {number} */
-  static #carriageReturn_980 = 13;
+  static #carriageReturn_989 = 13;
   /** @returns {number} */
   static get carriageReturn() {
-    return this.#carriageReturn_980;
+    return this.#carriageReturn_989;
   }
   /** @type {number} */
-  static #curlyLeft_981 = 123;
+  static #curlyLeft_990 = 123;
   /** @returns {number} */
   static get curlyLeft() {
-    return this.#curlyLeft_981;
+    return this.#curlyLeft_990;
   }
   /** @type {number} */
-  static #curlyRight_982 = 125;
+  static #curlyRight_991 = 125;
   /** @returns {number} */
   static get curlyRight() {
-    return this.#curlyRight_982;
+    return this.#curlyRight_991;
   }
   /** @type {number} */
-  static #dash_983 = 45;
+  static #dash_992 = 45;
   /** @returns {number} */
   static get dash() {
-    return this.#dash_983;
+    return this.#dash_992;
   }
   /** @type {number} */
-  static #dot_984 = 46;
+  static #dot_993 = 46;
   /** @returns {number} */
   static get dot() {
-    return this.#dot_984;
+    return this.#dot_993;
   }
   /** @type {number} */
-  static #highControlMin_985 = 127;
+  static #highControlMin_994 = 127;
   /** @returns {number} */
   static get highControlMin() {
-    return this.#highControlMin_985;
+    return this.#highControlMin_994;
   }
   /** @type {number} */
-  static #highControlMax_986 = 159;
+  static #highControlMax_995 = 159;
   /** @returns {number} */
   static get highControlMax() {
-    return this.#highControlMax_986;
+    return this.#highControlMax_995;
   }
   /** @type {number} */
-  static #digit0_987 = 48;
+  static #digit0_996 = 48;
   /** @returns {number} */
   static get digit0() {
-    return this.#digit0_987;
+    return this.#digit0_996;
   }
   /** @type {number} */
-  static #digit9_988 = 57;
+  static #digit9_997 = 57;
   /** @returns {number} */
   static get digit9() {
-    return this.#digit9_988;
+    return this.#digit9_997;
   }
   /** @type {number} */
-  static #lowerA_989 = 97;
+  static #lowerA_998 = 97;
   /** @returns {number} */
   static get lowerA() {
-    return this.#lowerA_989;
+    return this.#lowerA_998;
   }
   /** @type {number} */
-  static #lowerZ_990 = 122;
+  static #lowerZ_999 = 122;
   /** @returns {number} */
   static get lowerZ() {
-    return this.#lowerZ_990;
+    return this.#lowerZ_999;
   }
   /** @type {number} */
-  static #newline_991 = 10;
+  static #newline_1000 = 10;
   /** @returns {number} */
   static get newline() {
-    return this.#newline_991;
+    return this.#newline_1000;
   }
   /** @type {number} */
-  static #peso_992 = 36;
+  static #peso_1001 = 36;
   /** @returns {number} */
   static get peso() {
-    return this.#peso_992;
+    return this.#peso_1001;
   }
   /** @type {number} */
-  static #pipe_993 = 124;
+  static #pipe_1002 = 124;
   /** @returns {number} */
   static get pipe() {
-    return this.#pipe_993;
+    return this.#pipe_1002;
   }
   /** @type {number} */
-  static #plus_994 = 43;
+  static #plus_1003 = 43;
   /** @returns {number} */
   static get plus() {
-    return this.#plus_994;
+    return this.#plus_1003;
   }
   /** @type {number} */
-  static #question_995 = 63;
+  static #question_1004 = 63;
   /** @returns {number} */
   static get question() {
-    return this.#question_995;
+    return this.#question_1004;
   }
   /** @type {number} */
-  static #roundLeft_996 = 40;
+  static #roundLeft_1005 = 40;
   /** @returns {number} */
   static get roundLeft() {
-    return this.#roundLeft_996;
+    return this.#roundLeft_1005;
   }
   /** @type {number} */
-  static #roundRight_997 = 41;
+  static #roundRight_1006 = 41;
   /** @returns {number} */
   static get roundRight() {
-    return this.#roundRight_997;
+    return this.#roundRight_1006;
   }
   /** @type {number} */
-  static #slash_998 = 47;
+  static #slash_1007 = 47;
   /** @returns {number} */
   static get slash() {
-    return this.#slash_998;
+    return this.#slash_1007;
   }
   /** @type {number} */
-  static #squareLeft_999 = 91;
+  static #squareLeft_1008 = 91;
   /** @returns {number} */
   static get squareLeft() {
-    return this.#squareLeft_999;
+    return this.#squareLeft_1008;
   }
   /** @type {number} */
-  static #squareRight_1000 = 93;
+  static #squareRight_1009 = 93;
   /** @returns {number} */
   static get squareRight() {
-    return this.#squareRight_1000;
+    return this.#squareRight_1009;
   }
   /** @type {number} */
-  static #star_1001 = 42;
+  static #star_1010 = 42;
   /** @returns {number} */
   static get star() {
-    return this.#star_1001;
+    return this.#star_1010;
   }
   /** @type {number} */
-  static #tab_1002 = 9;
+  static #tab_1011 = 9;
   /** @returns {number} */
   static get tab() {
-    return this.#tab_1002;
+    return this.#tab_1011;
   }
   /** @type {number} */
-  static #tilde_1003 = 42;
+  static #tilde_1012 = 42;
   /** @returns {number} */
   static get tilde() {
-    return this.#tilde_1003;
+    return this.#tilde_1012;
   }
   /** @type {number} */
-  static #upperA_1004 = 65;
+  static #upperA_1013 = 65;
   /** @returns {number} */
   static get upperA() {
-    return this.#upperA_1004;
+    return this.#upperA_1013;
   }
   /** @type {number} */
-  static #upperZ_1005 = 90;
+  static #upperZ_1014 = 90;
   /** @returns {number} */
   static get upperZ() {
-    return this.#upperZ_1005;
+    return this.#upperZ_1014;
   }
   /** @type {number} */
-  static #space_1006 = 32;
+  static #space_1015 = 32;
   /** @returns {number} */
   static get space() {
-    return this.#space_1006;
+    return this.#space_1015;
   }
   /** @type {number} */
-  static #surrogateMin_1007 = 55296;
+  static #surrogateMin_1016 = 55296;
   /** @returns {number} */
   static get surrogateMin() {
-    return this.#surrogateMin_1007;
+    return this.#surrogateMin_1016;
   }
   /** @type {number} */
-  static #surrogateMax_1008 = 57343;
+  static #surrogateMax_1017 = 57343;
   /** @returns {number} */
   static get surrogateMax() {
-    return this.#surrogateMax_1008;
+    return this.#surrogateMax_1017;
   }
   /** @type {number} */
-  static #supplementalMin_1009 = 65536;
+  static #supplementalMin_1018 = 65536;
   /** @returns {number} */
   static get supplementalMin() {
-    return this.#supplementalMin_1009;
+    return this.#supplementalMin_1018;
   }
   /** @type {number} */
-  static #uint16Max_1010 = 65535;
+  static #uint16Max_1019 = 65535;
   /** @returns {number} */
   static get uint16Max() {
-    return this.#uint16Max_1010;
+    return this.#uint16Max_1019;
   }
   /** @type {number} */
-  static #underscore_1011 = 95;
+  static #underscore_1020 = 95;
   /** @returns {number} */
   static get underscore() {
-    return this.#underscore_1011;
+    return this.#underscore_1020;
   }
   constructor() {
     super ();
     return;
   }
 }
-class Begin_1012 extends type__753(Special) {
+class Begin_1021 extends type__762(Special) {
   constructor() {
     super ();
     return;
   }
 }
 /** @type {Special} */
-const return_1013 = new Begin_1012();
+const return_1022 = new Begin_1021();
 /** @type {Special} */
-export const Begin = return_1013;
-class Dot_1014 extends type__753(Special) {
+export const Begin = return_1022;
+class Dot_1023 extends type__762(Special) {
   constructor() {
     super ();
     return;
   }
 }
 /** @type {Special} */
-const return_1015 = new Dot_1014();
+const return_1024 = new Dot_1023();
 /** @type {Special} */
-export const Dot = return_1015;
-class End_1016 extends type__753(Special) {
+export const Dot = return_1024;
+class End_1025 extends type__762(Special) {
   constructor() {
     super ();
     return;
   }
 }
 /** @type {Special} */
-const return_1017 = new End_1016();
+const return_1026 = new End_1025();
 /** @type {Special} */
-export const End = return_1017;
-class WordBoundary_1018 extends type__753(Special) {
+export const End = return_1026;
+class WordBoundary_1027 extends type__762(Special) {
   constructor() {
     super ();
     return;
   }
 }
 /** @type {Special} */
-const return_1019 = new WordBoundary_1018();
+const return_1028 = new WordBoundary_1027();
 /** @type {Special} */
-export const WordBoundary = return_1019;
-class Digit_1020 extends type__753(SpecialSet) {
-  constructor() {
-    super ();
-    return;
-  }
-}
-/** @type {SpecialSet} */
-const return_1021 = new Digit_1020();
-/** @type {SpecialSet} */
-export const Digit = return_1021;
-class Space_1022 extends type__753(SpecialSet) {
+export const WordBoundary = return_1028;
+class Digit_1029 extends type__762(SpecialSet) {
   constructor() {
     super ();
     return;
   }
 }
 /** @type {SpecialSet} */
-const return_1023 = new Space_1022();
+const return_1030 = new Digit_1029();
 /** @type {SpecialSet} */
-export const Space = return_1023;
-class Word_1024 extends type__753(SpecialSet) {
+export const Digit = return_1030;
+class Space_1031 extends type__762(SpecialSet) {
   constructor() {
     super ();
     return;
   }
 }
 /** @type {SpecialSet} */
-const return_1025 = new Word_1024();
+const return_1032 = new Space_1031();
 /** @type {SpecialSet} */
-export const Word = return_1025;
+export const Space = return_1032;
+class Word_1033 extends type__762(SpecialSet) {
+  constructor() {
+    super ();
+    return;
+  }
+}
+/** @type {SpecialSet} */
+const return_1034 = new Word_1033();
+/** @type {SpecialSet} */
+export const Word = return_1034;
 /** @returns {Array<number>} */
-function buildEscapeNeeds_1026() {
-  let t_1027;
-  let t_1028;
-  let t_1029;
-  let t_1030;
-  let t_1031;
-  let t_1032;
-  let t_1033;
-  let t_1034;
-  let t_1035;
+function buildEscapeNeeds_1035() {
   let t_1036;
   let t_1037;
   let t_1038;
@@ -1193,179 +1184,188 @@ function buildEscapeNeeds_1026() {
   let t_1049;
   let t_1050;
   let t_1051;
-  const escapeNeeds_1052 = [];
-  let code_1053 = 0;
-  while (code_1053 <= 127) {
-    if (code_1053 === Codes_910.dash) {
-      t_1034 = true;
+  let t_1052;
+  let t_1053;
+  let t_1054;
+  let t_1055;
+  let t_1056;
+  let t_1057;
+  let t_1058;
+  let t_1059;
+  let t_1060;
+  const escapeNeeds_1061 = [];
+  let code_1062 = 0;
+  while (code_1062 <= 127) {
+    if (code_1062 === Codes_919.dash) {
+      t_1043 = true;
     } else {
-      if (code_1053 === Codes_910.space) {
-        t_1033 = true;
+      if (code_1062 === Codes_919.space) {
+        t_1042 = true;
       } else {
-        if (code_1053 === Codes_910.underscore) {
-          t_1032 = true;
+        if (code_1062 === Codes_919.underscore) {
+          t_1041 = true;
         } else {
-          if (Codes_910.digit0 <= code_1053) {
-            t_1027 = code_1053 <= Codes_910.digit9;
+          if (Codes_919.digit0 <= code_1062) {
+            t_1036 = code_1062 <= Codes_919.digit9;
           } else {
-            t_1027 = false;
+            t_1036 = false;
           }
-          if (t_1027) {
-            t_1031 = true;
+          if (t_1036) {
+            t_1040 = true;
           } else {
-            if (Codes_910.upperA <= code_1053) {
-              t_1028 = code_1053 <= Codes_910.upperZ;
+            if (Codes_919.upperA <= code_1062) {
+              t_1037 = code_1062 <= Codes_919.upperZ;
             } else {
-              t_1028 = false;
+              t_1037 = false;
             }
-            if (t_1028) {
-              t_1030 = true;
+            if (t_1037) {
+              t_1039 = true;
             } else {
-              if (Codes_910.lowerA <= code_1053) {
-                t_1029 = code_1053 <= Codes_910.lowerZ;
+              if (Codes_919.lowerA <= code_1062) {
+                t_1038 = code_1062 <= Codes_919.lowerZ;
               } else {
-                t_1029 = false;
+                t_1038 = false;
               }
-              t_1030 = t_1029;
+              t_1039 = t_1038;
             }
-            t_1031 = t_1030;
+            t_1040 = t_1039;
           }
-          t_1032 = t_1031;
+          t_1041 = t_1040;
         }
-        t_1033 = t_1032;
+        t_1042 = t_1041;
       }
-      t_1034 = t_1033;
+      t_1043 = t_1042;
     }
-    if (t_1034) {
-      t_1051 = 0;
+    if (t_1043) {
+      t_1060 = 0;
     } else {
-      if (code_1053 === Codes_910.ampersand) {
-        t_1050 = true;
+      if (code_1062 === Codes_919.ampersand) {
+        t_1059 = true;
       } else {
-        if (code_1053 === Codes_910.backslash) {
-          t_1049 = true;
+        if (code_1062 === Codes_919.backslash) {
+          t_1058 = true;
         } else {
-          if (code_1053 === Codes_910.caret) {
-            t_1048 = true;
+          if (code_1062 === Codes_919.caret) {
+            t_1057 = true;
           } else {
-            if (code_1053 === Codes_910.curlyLeft) {
-              t_1047 = true;
+            if (code_1062 === Codes_919.curlyLeft) {
+              t_1056 = true;
             } else {
-              if (code_1053 === Codes_910.curlyRight) {
-                t_1046 = true;
+              if (code_1062 === Codes_919.curlyRight) {
+                t_1055 = true;
               } else {
-                if (code_1053 === Codes_910.dot) {
-                  t_1045 = true;
+                if (code_1062 === Codes_919.dot) {
+                  t_1054 = true;
                 } else {
-                  if (code_1053 === Codes_910.peso) {
-                    t_1044 = true;
+                  if (code_1062 === Codes_919.peso) {
+                    t_1053 = true;
                   } else {
-                    if (code_1053 === Codes_910.pipe) {
-                      t_1043 = true;
+                    if (code_1062 === Codes_919.pipe) {
+                      t_1052 = true;
                     } else {
-                      if (code_1053 === Codes_910.plus) {
-                        t_1042 = true;
+                      if (code_1062 === Codes_919.plus) {
+                        t_1051 = true;
                       } else {
-                        if (code_1053 === Codes_910.question) {
-                          t_1041 = true;
+                        if (code_1062 === Codes_919.question) {
+                          t_1050 = true;
                         } else {
-                          if (code_1053 === Codes_910.roundLeft) {
-                            t_1040 = true;
+                          if (code_1062 === Codes_919.roundLeft) {
+                            t_1049 = true;
                           } else {
-                            if (code_1053 === Codes_910.roundRight) {
-                              t_1039 = true;
+                            if (code_1062 === Codes_919.roundRight) {
+                              t_1048 = true;
                             } else {
-                              if (code_1053 === Codes_910.slash) {
-                                t_1038 = true;
+                              if (code_1062 === Codes_919.slash) {
+                                t_1047 = true;
                               } else {
-                                if (code_1053 === Codes_910.squareLeft) {
-                                  t_1037 = true;
+                                if (code_1062 === Codes_919.squareLeft) {
+                                  t_1046 = true;
                                 } else {
-                                  if (code_1053 === Codes_910.squareRight) {
-                                    t_1036 = true;
+                                  if (code_1062 === Codes_919.squareRight) {
+                                    t_1045 = true;
                                   } else {
-                                    if (code_1053 === Codes_910.star) {
-                                      t_1035 = true;
+                                    if (code_1062 === Codes_919.star) {
+                                      t_1044 = true;
                                     } else {
-                                      t_1035 = code_1053 === Codes_910.tilde;
+                                      t_1044 = code_1062 === Codes_919.tilde;
                                     }
-                                    t_1036 = t_1035;
+                                    t_1045 = t_1044;
                                   }
-                                  t_1037 = t_1036;
+                                  t_1046 = t_1045;
                                 }
-                                t_1038 = t_1037;
+                                t_1047 = t_1046;
                               }
-                              t_1039 = t_1038;
+                              t_1048 = t_1047;
                             }
-                            t_1040 = t_1039;
+                            t_1049 = t_1048;
                           }
-                          t_1041 = t_1040;
+                          t_1050 = t_1049;
                         }
-                        t_1042 = t_1041;
+                        t_1051 = t_1050;
                       }
-                      t_1043 = t_1042;
+                      t_1052 = t_1051;
                     }
-                    t_1044 = t_1043;
+                    t_1053 = t_1052;
                   }
-                  t_1045 = t_1044;
+                  t_1054 = t_1053;
                 }
-                t_1046 = t_1045;
+                t_1055 = t_1054;
               }
-              t_1047 = t_1046;
+              t_1056 = t_1055;
             }
-            t_1048 = t_1047;
+            t_1057 = t_1056;
           }
-          t_1049 = t_1048;
+          t_1058 = t_1057;
         }
-        t_1050 = t_1049;
+        t_1059 = t_1058;
       }
-      if (t_1050) {
-        t_1051 = 2;
+      if (t_1059) {
+        t_1060 = 2;
       } else {
-        t_1051 = 1;
+        t_1060 = 1;
       }
     }
-    listBuilderAdd_1054(escapeNeeds_1052, t_1051);
-    code_1053 = code_1053 + 1 | 0;
+    listBuilderAdd_1063(escapeNeeds_1061, t_1060);
+    code_1062 = code_1062 + 1 | 0;
   }
-  return listBuilderToList_1055(escapeNeeds_1052);
+  return listBuilderToList_1064(escapeNeeds_1061);
 }
 /** @type {Array<number>} */
-const escapeNeeds_913 = buildEscapeNeeds_1026();
-/** @type {RegexRefs_813} */
-const regexRefs_853 = new RegexRefs_813();
+const escapeNeeds_922 = buildEscapeNeeds_1035();
+/** @type {RegexRefs_822} */
+const regexRefs_862 = new RegexRefs_822();
 /**
- * @param {RegexNode} item_1056
+ * @param {RegexNode} item_1065
  * @returns {RegexNode}
  */
-export function entire(item_1056) {
-  return new Sequence(Object.freeze([Begin, item_1056, End]));
+export function entire(item_1065) {
+  return new Sequence(Object.freeze([Begin, item_1065, End]));
 };
 /**
- * @param {RegexNode} item_1057
- * @param {boolean | null} [reluctant_1058]
+ * @param {RegexNode} item_1066
+ * @param {boolean | null} [reluctant_1067]
  * @returns {Repeat}
  */
-export function oneOrMore(item_1057, reluctant_1058) {
-  let reluctant_1059;
-  if (reluctant_1058 == null) {
-    reluctant_1059 = false;
+export function oneOrMore(item_1066, reluctant_1067) {
+  let reluctant_1068;
+  if (reluctant_1067 == null) {
+    reluctant_1068 = false;
   } else {
-    reluctant_1059 = reluctant_1058;
+    reluctant_1068 = reluctant_1067;
   }
-  return new Repeat(item_1057, 1, null, reluctant_1059);
+  return new Repeat(item_1066, 1, null, reluctant_1068);
 };
 /**
- * @param {RegexNode} item_1060
- * @param {boolean | null} [reluctant_1061]
+ * @param {RegexNode} item_1069
+ * @param {boolean | null} [reluctant_1070]
  * @returns {Repeat}
  */
-export function optional(item_1060, reluctant_1061) {
-  let reluctant_1062;
-  if (reluctant_1061 == null) {
-    reluctant_1062 = false;
+export function optional(item_1069, reluctant_1070) {
+  let reluctant_1071;
+  if (reluctant_1070 == null) {
+    reluctant_1071 = false;
   } else {
-    reluctant_1062 = reluctant_1061;
+    reluctant_1071 = reluctant_1070;
   }
-  return new Repeat(item_1060, 0, 1, reluctant_1062);
+  return new Repeat(item_1069, 0, 1, reluctant_1071);
 };

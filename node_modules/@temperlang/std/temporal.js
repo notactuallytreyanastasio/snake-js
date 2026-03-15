@@ -1,25 +1,25 @@
 import {
-  JsonProducer as JsonProducer_1068, JsonSyntaxTree as JsonSyntaxTree_1073, InterchangeContext as InterchangeContext_1074, JsonAdapter as JsonAdapter_1075, JsonString as JsonString_1083
+  JsonProducer as JsonProducer_1077, JsonSyntaxTree as JsonSyntaxTree_1082, InterchangeContext as InterchangeContext_1083, JsonAdapter as JsonAdapter_1084, JsonString as JsonString_1092
 } from "./json.js";
 import {
-  type as type__1076, requireInstanceOf as requireInstanceOf__1084, modIntInt as modIntInt_1091, stringGet as stringGet_1102, stringNext as stringNext_1103, stringCountBetween as stringCountBetween_1105
+  type as type__1085, requireInstanceOf as requireInstanceOf__1093, modIntInt as modIntInt_1100, stringGet as stringGet_1111, stringNext as stringNext_1112, stringCountBetween as stringCountBetween_1114
 } from "@temperlang/core";
-class DateJsonAdapter_1063 extends type__1076(JsonAdapter_1075) {
+class DateJsonAdapter_1072 extends type__1085(JsonAdapter_1084) {
   /**
-   * @param {globalThis.Date} x_1065
-   * @param {JsonProducer_1068} p_1066
+   * @param {globalThis.Date} x_1074
+   * @param {JsonProducer_1077} p_1075
    */
-  encodeToJson(x_1065, p_1066) {
-    encodeToJson_1067(x_1065, p_1066);
+  encodeToJson(x_1074, p_1075) {
+    encodeToJson_1076(x_1074, p_1075);
     return;
   }
   /**
-   * @param {JsonSyntaxTree_1073} t_1070
-   * @param {InterchangeContext_1074} ic_1071
+   * @param {JsonSyntaxTree_1082} t_1079
+   * @param {InterchangeContext_1083} ic_1080
    * @returns {globalThis.Date}
    */
-  decodeFromJson(t_1070, ic_1071) {
-    return decodeFromJson_1072(t_1070, ic_1071);
+  decodeFromJson(t_1079, ic_1080) {
+    return decodeFromJson_1081(t_1079, ic_1080);
   }
   constructor() {
     super ();
@@ -28,82 +28,82 @@ class DateJsonAdapter_1063 extends type__1076(JsonAdapter_1075) {
 }
 // Type `std/temporal/`.Date connected to globalThis.Date
 /**
- * @param {globalThis.Date} this_1077
- * @param {JsonProducer_1068} p_1078
+ * @param {globalThis.Date} this_1086
+ * @param {JsonProducer_1077} p_1087
  */
-function encodeToJson_1067(this_1077, p_1078) {
-  let t_1079 = this_1077.toISOString().split("T")[0];
-  p_1078.stringValue(t_1079);
+function encodeToJson_1076(this_1086, p_1087) {
+  let t_1088 = this_1086.toISOString().split("T")[0];
+  p_1087.stringValue(t_1088);
   return;
 }
 /**
- * @param {JsonSyntaxTree_1073} t_1080
- * @param {InterchangeContext_1074} ic_1081
+ * @param {JsonSyntaxTree_1082} t_1089
+ * @param {InterchangeContext_1083} ic_1090
  * @returns {globalThis.Date}
  */
-function decodeFromJson_1072(t_1080, ic_1081) {
-  let t_1082;
-  t_1082 = requireInstanceOf__1084(t_1080, JsonString_1083);
-  return new (globalThis.Date)(globalThis.Date.parse(t_1082.content));
+function decodeFromJson_1081(t_1089, ic_1090) {
+  let t_1091;
+  t_1091 = requireInstanceOf__1093(t_1089, JsonString_1092);
+  return new (globalThis.Date)(globalThis.Date.parse(t_1091.content));
 }
-/** @returns {JsonAdapter_1075<globalThis.Date>} */
-function jsonAdapter_1085() {
-  return new DateJsonAdapter_1063();
+/** @returns {JsonAdapter_1084<globalThis.Date>} */
+function jsonAdapter_1094() {
+  return new DateJsonAdapter_1072();
 }
 /** @type {Array<number>} */
-const daysInMonth_1086 = Object.freeze([0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]);
+const daysInMonth_1095 = Object.freeze([0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]);
 /**
- * @param {number} year_1088
+ * @param {number} year_1097
  * @returns {boolean}
  */
-function isLeapYear_1087(year_1088) {
-  let return_1089;
-  let t_1090;
-  if (modIntInt_1091(year_1088, 4) === 0) {
-    if (modIntInt_1091(year_1088, 100) !== 0) {
-      return_1089 = true;
+function isLeapYear_1096(year_1097) {
+  let return_1098;
+  let t_1099;
+  if (modIntInt_1100(year_1097, 4) === 0) {
+    if (modIntInt_1100(year_1097, 100) !== 0) {
+      return_1098 = true;
     } else {
-      t_1090 = modIntInt_1091(year_1088, 400);
-      return_1089 = t_1090 === 0;
+      t_1099 = modIntInt_1100(year_1097, 400);
+      return_1098 = t_1099 === 0;
     }
   } else {
-    return_1089 = false;
+    return_1098 = false;
   }
-  return return_1089;
+  return return_1098;
 }
 /**
- * @param {number} minWidth_1093
- * @param {number} num_1094
- * @param {globalThis.Array<string>} sb_1095
+ * @param {number} minWidth_1102
+ * @param {number} num_1103
+ * @param {globalThis.Array<string>} sb_1104
  */
-function padTo_1092(minWidth_1093, num_1094, sb_1095) {
-  let t_1096;
-  let t_1097;
-  let t_1098;
-  const decimal_1099 = num_1094.toString(10);
-  let decimalIndex_1100 = 0;
-  const decimalEnd_1101 = decimal_1099.length;
-  if (decimalIndex_1100 < decimalEnd_1101) {
-    t_1096 = stringGet_1102(decimal_1099, decimalIndex_1100);
-    t_1098 = t_1096 === 45;
+function padTo_1101(minWidth_1102, num_1103, sb_1104) {
+  let t_1105;
+  let t_1106;
+  let t_1107;
+  const decimal_1108 = num_1103.toString(10);
+  let decimalIndex_1109 = 0;
+  const decimalEnd_1110 = decimal_1108.length;
+  if (decimalIndex_1109 < decimalEnd_1110) {
+    t_1105 = stringGet_1111(decimal_1108, decimalIndex_1109);
+    t_1107 = t_1105 === 45;
   } else {
-    t_1098 = false;
+    t_1107 = false;
   }
-  if (t_1098) {
-    sb_1095[0] += "-";
-    t_1097 = stringNext_1103(decimal_1099, decimalIndex_1100);
-    decimalIndex_1100 = t_1097;
+  if (t_1107) {
+    sb_1104[0] += "-";
+    t_1106 = stringNext_1112(decimal_1108, decimalIndex_1109);
+    decimalIndex_1109 = t_1106;
   }
-  let t_1104 = stringCountBetween_1105(decimal_1099, decimalIndex_1100, decimalEnd_1101);
-  let nNeeded_1106 = minWidth_1093 - t_1104 | 0;
-  while (nNeeded_1106 > 0) {
-    sb_1095[0] += "0";
-    nNeeded_1106 = nNeeded_1106 - 1 | 0;
+  let t_1113 = stringCountBetween_1114(decimal_1108, decimalIndex_1109, decimalEnd_1110);
+  let nNeeded_1115 = minWidth_1102 - t_1113 | 0;
+  while (nNeeded_1115 > 0) {
+    sb_1104[0] += "0";
+    nNeeded_1115 = nNeeded_1115 - 1 | 0;
   }
-  sb_1095[0] += decimal_1099.substring(decimalIndex_1100, decimalEnd_1101);
+  sb_1104[0] += decimal_1108.substring(decimalIndex_1109, decimalEnd_1110);
   return;
 }
 /** @type {Array<number>} */
-const dayOfWeekLookupTableLeapy_1107 = Object.freeze([0, 0, 3, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6]);
+const dayOfWeekLookupTableLeapy_1116 = Object.freeze([0, 0, 3, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6]);
 /** @type {Array<number>} */
-const dayOfWeekLookupTableNotLeapy_1108 = Object.freeze([0, 0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5]);
+const dayOfWeekLookupTableNotLeapy_1117 = Object.freeze([0, 0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5]);

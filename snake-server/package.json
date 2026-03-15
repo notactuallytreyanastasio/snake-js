@@ -1,0 +1,13 @@
+{
+    "name": "snake-server",
+    "type": "module",
+    "exports": {
+        "./snake_server": "./snake_server.js",
+        ".": "./index.js"
+    },
+    "dependencies": {
+        "@temperlang/core": "0.6.0",
+        "@temperlang/std": "0.6.0",
+        "snake": "*"
+    }
+}

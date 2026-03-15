@@ -8,6 +8,7 @@
     "type": "module",
     "exports": {
         "./io": "./io.js",
+        "./ws": "./ws.js",
         "./testing": "./testing.js",
         "./json": "./json.js",
         "./net": "./net.js",

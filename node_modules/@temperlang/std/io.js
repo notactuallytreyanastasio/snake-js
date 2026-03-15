@@ -12,3 +12,11 @@ export function sleep(ms_0) {
 export function readLine() {
   return panic_1();
 };
+/** @returns {number} */
+export function terminalColumns() {
+  return panic_1();
+};
+/** @returns {number} */
+export function terminalRows() {
+  return panic_1();
+};

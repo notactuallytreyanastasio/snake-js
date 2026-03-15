@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.005" tests="18" failures="0">
-  <testsuite name="Root Suite" timestamp="2026-03-15T14:25:20" tests="18" time="0.005" failures="0">
-    <testcase name="initial state has snake near center" time="0.000" classname="initial state has snake near center">
+<testsuites name="Mocha Tests" time="0.012" tests="31" failures="0">
+  <testsuite name="Root Suite" timestamp="2026-03-15T23:10:51" tests="31" time="0.011" failures="0">
+    <testcase name="initial state has snake near center" time="0.001" classname="initial state has snake near center">
     </testcase>
     <testcase name="initial status is Playing" time="0.000" classname="initial status is Playing">
     </testcase>
@@ -9,7 +9,7 @@
     </testcase>
     <testcase name="initial score is 0" time="0.000" classname="initial score is 0">
     </testcase>
-    <testcase name="snake moves right" time="0.001" classname="snake moves right">
+    <testcase name="snake moves right" time="0.000" classname="snake moves right">
     </testcase>
     <testcase name="snake moves down" time="0.000" classname="snake moves down">
     </testcase>
@@ -29,13 +29,39 @@
     </testcase>
     <testcase name="isOpposite detects opposite directions" time="0.000" classname="isOpposite detects opposite directions">
     </testcase>
-    <testcase name="directionDelta returns correct deltas" time="0.001" classname="directionDelta returns correct deltas">
+    <testcase name="directionDelta returns correct deltas" time="0.000" classname="directionDelta returns correct deltas">
     </testcase>
     <testcase name="PRNG is deterministic" time="0.000" classname="PRNG is deterministic">
     </testcase>
     <testcase name="PRNG produces values in range" time="0.000" classname="PRNG produces values in range">
     </testcase>
     <testcase name="tick does nothing when game is over" time="0.000" classname="tick does nothing when game is over">
+    </testcase>
+    <testcase name="multi game creates correct number of snakes" time="0.000" classname="multi game creates correct number of snakes">
+    </testcase>
+    <testcase name="multi game snakes start alive" time="0.000" classname="multi game snakes start alive">
+    </testcase>
+    <testcase name="multi game snakes start at different positions" time="0.000" classname="multi game snakes start at different positions">
+    </testcase>
+    <testcase name="multi game snakes have 3 segments each" time="0.001" classname="multi game snakes have 3 segments each">
+    </testcase>
+    <testcase name="multi tick moves both snakes" time="0.000" classname="multi tick moves both snakes">
+    </testcase>
+    <testcase name="multi wall collision kills one snake" time="0.001" classname="multi wall collision kills one snake">
+    </testcase>
+    <testcase name="multi game over when one player left" time="0.000" classname="multi game over when one player left">
+    </testcase>
+    <testcase name="changePlayerDirection works" time="0.001" classname="changePlayerDirection works">
+    </testcase>
+    <testcase name="changePlayerDirection rejects opposite" time="0.000" classname="changePlayerDirection rejects opposite">
+    </testcase>
+    <testcase name="addPlayer adds a new snake" time="0.000" classname="addPlayer adds a new snake">
+    </testcase>
+    <testcase name="removePlayer removes a snake" time="0.000" classname="removePlayer removes a snake">
+    </testcase>
+    <testcase name="multiRender produces output" time="0.002" classname="multiRender produces output">
+    </testcase>
+    <testcase name="directionToString and stringToDirection round-trip" time="0.000" classname="directionToString and stringToDirection round-trip">
     </testcase>
   </testsuite>
 </testsuites>
