@@ -1,6 +1,6 @@
 # Snake (JavaScript)
 
-A terminal snake game written in [JavaScript] — auto-generated from [Temper](https://temperlang.dev) source code.
+A terminal snake game written in JavaScript — auto-generated from [Temper](https://temperlang.dev) source code.
 
 ## How to Play
 
@@ -14,9 +14,23 @@ npm install && node snake-game/index.js
 
 Use **w/a/s/d** keys to steer the snake. No Enter key needed — input is raw mode.
 
-## The Story
+## What Is This?
 
-This code was not written by a human in JavaScript. It was written once in [Temper](https://temperlang.dev) — a programming language that compiles to 6 other languages — and then automatically compiled and published here by CI.
+This code was not written by a human in JavaScript. It was written once in [Temper](https://temperlang.dev) — a programming language that compiles to JavaScript, Python, Lua, Rust, Java, and C# — and then automatically compiled to JavaScript and published here by CI.
+
+Temper had no way to pause execution or read input. The only I/O was `console.log()`. To play snake, we had to add `sleep(ms)` and `readLine()` to the language itself — modifying the Temper compiler across all six backends.
+
+## What Changed in the Temper Compiler for JavaScript
+
+The JS backend uses the "auto-connected" pattern: connected keys listed in `supportedAutoConnecteds` are automatically mapped to exported functions whose names match the key.
+
+**Compiler changes** (`JsSupportNetwork.kt`): `"stdSleep"` and `"stdReadLine"` added to the auto-connected set.
+
+**Runtime** (`temper-core/io.js`): `stdSleep` uses `setTimeout` wrapped in a native `Promise`. `stdReadLine` uses `process.stdin` with raw mode enabled via `setRawMode(true)` for single-keypress input without requiring Enter. Ctrl+C is detected manually since raw mode bypasses the default signal handler.
+
+JS was the easiest backend — native Promises and a built-in event loop mean `async {}` blocks just work.
+
+## All 6 Backends
 
 The same snake game exists in 6 languages, all generated from [one Temper source](https://github.com/notactuallytreyanastasio/temper_snake):
 
@@ -29,19 +43,11 @@ The same snake game exists in 6 languages, all generated from [one Temper source
 | C# | [snake-csharp](https://github.com/notactuallytreyanastasio/snake-csharp) |
 | Java | [snake-java](https://github.com/notactuallytreyanastasio/snake-java) |
 
-## How It Works
-
-1. The game logic lives in [`temper_snake`](https://github.com/notactuallytreyanastasio/temper_snake) as `.temper.md` files
-2. A custom Temper compiler (branch [`do-crimes-to-play-snake`](https://github.com/temperlang/temper/tree/do-crimes-to-play-snake)) adds `sleep()` and `readLine()` I/O primitives
-3. GitHub Actions builds the compiler, compiles the game for all 6 backends, runs tests
-4. If tests pass, the compiled output is automatically pushed to this repo
-
-Every push to the source repo triggers a fresh build. This code is always in sync.
-
 ## Source
 
-[notactuallytreyanastasio/temper_snake](https://github.com/notactuallytreyanastasio/temper_snake)
+- Game source: [notactuallytreyanastasio/temper_snake](https://github.com/notactuallytreyanastasio/temper_snake)
+- Compiler branch: [`do-crimes-to-play-snake`](https://github.com/temperlang/temper/tree/do-crimes-to-play-snake) ([PR #376](https://github.com/temperlang/temper/pull/376))
 
 ---
 
-*Auto-generated from commit [`d27a2fddc11e33daafd386ab9534e4084cb1d29b`](https://github.com/notactuallytreyanastasio/temper_snake/commit/d27a2fddc11e33daafd386ab9534e4084cb1d29b)*
+*Auto-generated from commit [`bc2e9fd57ff0765930c54c5a8c0b6c14ad2c46a1`](https://github.com/notactuallytreyanastasio/temper_snake/commit/bc2e9fd57ff0765930c54c5a8c0b6c14ad2c46a1)*
