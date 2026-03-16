@@ -395,7 +395,7 @@ it("multi game snakes start alive", function () {
 it("multi game snakes start at different positions", function () {
     const test_154 = new Test_17();
     try {
-      const game_155 = newMultiGame_7(20, 10, 2, 42);
+      const game_155 = newMultiGame_7(60, 30, 2, 42);
       const s0_156 = listedGetOr_20(game_155.snakes, 0, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147()));
       const s1_157 = listedGetOr_20(game_155.snakes, 1, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147()));
       const h0_158 = listedGetOr_20(s0_156.segments, 0, new Point_21(-1, -1));
@@ -434,187 +434,189 @@ it("multi game snakes have 3 segments each", function () {
 it("multi tick moves both snakes", function () {
     const test_170 = new Test_17();
     try {
-      const game_171 = newMultiGame_7(20, 10, 2, 42);
-      const h0Before_172 = listedGetOr_20(listedGetOr_20(game_171.snakes, 0, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147())).segments, 0, new Point_21(0, 0));
-      const h1Before_173 = listedGetOr_20(listedGetOr_20(game_171.snakes, 1, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147())).segments, 0, new Point_21(0, 0));
-      const dirs_174 = Object.freeze([new Right_36(), new Left_69()]);
-      const after_175 = multiTick_8(game_171, dirs_174);
-      const h0After_176 = listedGetOr_20(listedGetOr_20(after_175.snakes, 0, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147())).segments, 0, new Point_21(0, 0));
-      const h1After_177 = listedGetOr_20(listedGetOr_20(after_175.snakes, 1, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147())).segments, 0, new Point_21(0, 0));
-      let t_178 = ! pointEquals_0(h0Before_172, h0After_176);
-      function fn_179() {
+      const game_171 = newMultiGame_7(60, 30, 2, 42);
+      const s0_172 = listedGetOr_20(game_171.snakes, 0, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147()));
+      const s1_173 = listedGetOr_20(game_171.snakes, 1, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147()));
+      const h0Before_174 = listedGetOr_20(s0_172.segments, 0, new Point_21(0, 0));
+      const h1Before_175 = listedGetOr_20(s1_173.segments, 0, new Point_21(0, 0));
+      const dirs_176 = Object.freeze([s0_172.direction, s1_173.direction]);
+      const after_177 = multiTick_8(game_171, dirs_176);
+      const h0After_178 = listedGetOr_20(listedGetOr_20(after_177.snakes, 0, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147())).segments, 0, new Point_21(0, 0));
+      const h1After_179 = listedGetOr_20(listedGetOr_20(after_177.snakes, 1, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147())).segments, 0, new Point_21(0, 0));
+      let t_180 = ! pointEquals_0(h0Before_174, h0After_178);
+      function fn_181() {
         return "snake 0 should have moved";
       }
-      test_170.assert(t_178, fn_179);
-      let t_180 = ! pointEquals_0(h1Before_173, h1After_177);
-      function fn_181() {
+      test_170.assert(t_180, fn_181);
+      let t_182 = ! pointEquals_0(h1Before_175, h1After_179);
+      function fn_183() {
         return "snake 1 should have moved";
       }
-      test_170.assert(t_180, fn_181);
+      test_170.assert(t_182, fn_183);
       return;
     } finally {
       test_170.softFailToHard();
     }
 });
 it("multi wall collision kills one snake", function () {
-    const test_182 = new Test_17();
+    const test_184 = new Test_17();
     try {
-      let t_183;
-      let t_184;
       let t_185;
       let t_186;
-      let t_187 = newMultiGame_7(20, 10, 2, 42);
-      let game_188 = t_187;
-      const dirs_189 = Object.freeze([new Right_36(), new Left_69()]);
-      let i_190 = 0;
-      while (i_190 < 20) {
-        t_183 = multiTick_8(game_188, dirs_189);
-        game_188 = t_183;
-        i_190 = i_190 + 1 | 0;
-      }
-      let deadCount_191 = 0;
+      let t_187;
+      let t_188;
+      let t_189 = newMultiGame_7(20, 10, 2, 42);
+      let game_190 = t_189;
+      const dirs_191 = Object.freeze([new Right_36(), new Left_69()]);
       let i_192 = 0;
-      while (true) {
-        t_184 = game_188.snakes.length;
-        if (!(i_192 < t_184)) {
-          break;
-        }
-        t_185 = game_188.snakes;
-        t_186 = new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147());
-        const snake_193 = listedGetOr_20(t_185, i_192, t_186);
-        if (snake_193.status instanceof Dead_147) {
-          deadCount_191 = deadCount_191 + 1 | 0;
-        }
+      while (i_192 < 20) {
+        t_185 = multiTick_8(game_190, dirs_191);
+        game_190 = t_185;
         i_192 = i_192 + 1 | 0;
       }
-      let t_194 = deadCount_191 > 0;
-      function fn_195() {
+      let deadCount_193 = 0;
+      let i_194 = 0;
+      while (true) {
+        t_186 = game_190.snakes.length;
+        if (!(i_194 < t_186)) {
+          break;
+        }
+        t_187 = game_190.snakes;
+        t_188 = new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147());
+        const snake_195 = listedGetOr_20(t_187, i_194, t_188);
+        if (snake_195.status instanceof Dead_147) {
+          deadCount_193 = deadCount_193 + 1 | 0;
+        }
+        i_194 = i_194 + 1 | 0;
+      }
+      let t_196 = deadCount_193 > 0;
+      function fn_197() {
         return "at least one snake should be dead after 20 ticks toward walls";
       }
-      test_182.assert(t_194, fn_195);
+      test_184.assert(t_196, fn_197);
       return;
     } finally {
-      test_182.softFailToHard();
+      test_184.softFailToHard();
     }
 });
 it("multi game over when one player left", function () {
-    const test_196 = new Test_17();
+    const test_198 = new Test_17();
     try {
-      let t_197;
-      let t_198 = newMultiGame_7(20, 10, 2, 42);
-      let game_199 = t_198;
-      const dirs_200 = Object.freeze([new Right_36(), new Left_69()]);
-      let i_201 = 0;
-      while (i_201 < 30) {
-        t_197 = multiTick_8(game_199, dirs_200);
-        game_199 = t_197;
-        i_201 = i_201 + 1 | 0;
+      let t_199;
+      let t_200 = newMultiGame_7(20, 10, 2, 42);
+      let game_201 = t_200;
+      const dirs_202 = Object.freeze([new Right_36(), new Left_69()]);
+      let i_203 = 0;
+      while (i_203 < 30) {
+        t_199 = multiTick_8(game_201, dirs_202);
+        game_201 = t_199;
+        i_203 = i_203 + 1 | 0;
       }
-      let t_202 = isMultiGameOver_11(game_199);
-      function fn_203() {
+      let t_204 = isMultiGameOver_11(game_201);
+      function fn_205() {
         return "game should be over after enough ticks";
       }
-      test_196.assert(t_202, fn_203);
+      test_198.assert(t_204, fn_205);
       return;
     } finally {
-      test_196.softFailToHard();
+      test_198.softFailToHard();
     }
 });
 it("changePlayerDirection works", function () {
-    const test_204 = new Test_17();
+    const test_206 = new Test_17();
     try {
-      const game_205 = newMultiGame_7(20, 10, 2, 42);
-      let t_206 = new Up_61();
-      const changed_207 = changePlayerDirection_10(game_205, 0, t_206);
-      const s0_208 = listedGetOr_20(changed_207.snakes, 0, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147()));
-      let t_209 = s0_208.direction instanceof Up_61;
-      function fn_210() {
+      const game_207 = newMultiGame_7(20, 10, 2, 42);
+      let t_208 = new Up_61();
+      const changed_209 = changePlayerDirection_10(game_207, 0, t_208);
+      const s0_210 = listedGetOr_20(changed_209.snakes, 0, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147()));
+      let t_211 = s0_210.direction instanceof Up_61;
+      function fn_212() {
         return "player 0 direction should be Up";
       }
-      test_204.assert(t_209, fn_210);
+      test_206.assert(t_211, fn_212);
       return;
     } finally {
-      test_204.softFailToHard();
+      test_206.softFailToHard();
     }
 });
 it("changePlayerDirection rejects opposite", function () {
-    const test_211 = new Test_17();
+    const test_213 = new Test_17();
     try {
-      const game_212 = newMultiGame_7(20, 10, 2, 42);
-      let t_213 = new Left_69();
-      const changed_214 = changePlayerDirection_10(game_212, 0, t_213);
-      const s0_215 = listedGetOr_20(changed_214.snakes, 0, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147()));
-      let t_216 = s0_215.direction instanceof Right_36;
-      function fn_217() {
+      const game_214 = newMultiGame_7(20, 10, 2, 42);
+      let t_215 = new Left_69();
+      const changed_216 = changePlayerDirection_10(game_214, 0, t_215);
+      const s0_217 = listedGetOr_20(changed_216.snakes, 0, new PlayerSnake_146(0, Object.freeze([]), new Right_36(), 0, new Dead_147()));
+      let t_218 = s0_217.direction instanceof Right_36;
+      function fn_219() {
         return "should reject opposite direction";
       }
-      test_211.assert(t_216, fn_217);
+      test_213.assert(t_218, fn_219);
       return;
     } finally {
-      test_211.softFailToHard();
+      test_213.softFailToHard();
     }
 });
 it("addPlayer adds a new snake", function () {
-    const test_218 = new Test_17();
+    const test_220 = new Test_17();
     try {
-      const game_219 = newMultiGame_7(20, 10, 2, 42);
-      const bigger_220 = addPlayer_12(game_219, 99);
-      let t_221 = bigger_220.snakes.length === 3;
-      function fn_222() {
+      const game_221 = newMultiGame_7(20, 10, 2, 42);
+      const bigger_222 = addPlayer_12(game_221, 99);
+      let t_223 = bigger_222.snakes.length === 3;
+      function fn_224() {
         return "should have 3 snakes after adding";
       }
-      test_218.assert(t_221, fn_222);
+      test_220.assert(t_223, fn_224);
       return;
     } finally {
-      test_218.softFailToHard();
+      test_220.softFailToHard();
     }
 });
 it("removePlayer removes a snake", function () {
-    const test_223 = new Test_17();
+    const test_225 = new Test_17();
     try {
-      const game_224 = newMultiGame_7(20, 10, 3, 42);
-      const smaller_225 = removePlayer_13(game_224, 1);
-      let t_226 = smaller_225.snakes.length === 2;
-      function fn_227() {
+      const game_226 = newMultiGame_7(20, 10, 3, 42);
+      const smaller_227 = removePlayer_13(game_226, 1);
+      let t_228 = smaller_227.snakes.length === 2;
+      function fn_229() {
         return "should have 2 snakes after removing";
       }
-      test_223.assert(t_226, fn_227);
+      test_225.assert(t_228, fn_229);
       return;
     } finally {
-      test_223.softFailToHard();
+      test_225.softFailToHard();
     }
 });
 it("multiRender produces output", function () {
-    const test_228 = new Test_17();
+    const test_230 = new Test_17();
     try {
-      const game_229 = newMultiGame_7(20, 10, 2, 42);
-      const rendered_230 = multiRender_9(game_229);
-      let t_231 = rendered_230 !== "";
-      function fn_232() {
+      const game_231 = newMultiGame_7(20, 10, 2, 42);
+      const rendered_232 = multiRender_9(game_231);
+      let t_233 = rendered_232 !== "";
+      function fn_234() {
         return "render should produce output";
       }
-      test_228.assert(t_231, fn_232);
+      test_230.assert(t_233, fn_234);
       return;
     } finally {
-      test_228.softFailToHard();
+      test_230.softFailToHard();
     }
 });
 it("directionToString and stringToDirection round-trip", function () {
-    const test_233 = new Test_17();
+    const test_235 = new Test_17();
     try {
-      const d_234 = directionToString_14(new Up_61());
-      let t_235 = d_234 === "up";
-      function fn_236() {
+      const d_236 = directionToString_14(new Up_61());
+      let t_237 = d_236 === "up";
+      function fn_238() {
         return "Up should serialize to 'up'";
       }
-      test_233.assert(t_235, fn_236);
-      const parsed_237 = stringToDirection_15("down");
-      function fn_238() {
+      test_235.assert(t_237, fn_238);
+      const parsed_239 = stringToDirection_15("down");
+      function fn_240() {
         return "'down' should parse to Down";
       }
-      test_233.assert(true, fn_238);
+      test_235.assert(true, fn_240);
       return;
     } finally {
-      test_233.softFailToHard();
+      test_235.softFailToHard();
     }
 });

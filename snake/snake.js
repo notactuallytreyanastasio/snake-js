@@ -907,10 +907,10 @@ export function render(game_239) {
  * @param {number} width_253
  * @param {number} height_254
  * @param {number} index_255
- * @param {number} total_256
+ * @param {number} seed_256
  * @returns {SpawnInfo_77}
  */
-function spawnPosition_252(width_253, height_254, index_255, total_256) {
+function spawnPosition_252(width_253, height_254, index_255, seed_256) {
   let return_257;
   let t_258;
   let t_259;
@@ -925,137 +925,125 @@ function spawnPosition_252(width_253, height_254, index_255, total_256) {
   let t_268;
   let t_269;
   let t_270;
-  let t_271;
-  let t_272;
-  let t_273;
-  let t_274;
-  let t_275;
-  fn_276: {
-    let cx_277 = 0;
-    let cy_278 = 0;
-    if (width_253 > 0) {
-      t_266 = width_253 / 2 | 0;
-      t_267 = t_266;
-      cx_277 = t_267;
+  fn_271: {
+    const buf_272 = 5;
+    const safeW_273 = width_253 - 10 | 0;
+    const safeH_274 = height_254 - 10 | 0;
+    if (safeW_273 < 1) {
+      t_266 = true;
+    } else {
+      t_266 = safeH_274 < 1;
     }
-    if (height_254 > 0) {
-      t_268 = height_254 / 2 | 0;
-      t_269 = t_268;
-      cy_278 = t_269;
-    }
-    let qx_279 = 0;
-    let qy_280 = 0;
-    if (width_253 > 0) {
-      t_270 = width_253 / 4 | 0;
-      t_271 = t_270;
-      qx_279 = t_271;
-    }
-    if (height_254 > 0) {
-      t_272 = height_254 / 4 | 0;
-      t_273 = t_272;
-      qy_280 = t_273;
-    }
-    let slot_281 = 0;
-    if (total_256 > 0) {
-      t_274 = modIntInt_108(index_255, 4);
-      t_275 = t_274;
-      slot_281 = t_275;
-    }
-    if (slot_281 === 0) {
-      t_258 = new Point(qx_279, cy_278);
+    if (t_266) {
+      t_267 = width_253 / 2 | 0;
+      t_268 = t_267;
+      t_269 = height_254 / 2 | 0;
+      t_270 = t_269;
+      t_258 = new Point(t_268, t_270);
       t_259 = new Right();
       return_257 = new SpawnInfo_77(t_258, t_259);
-      break fn_276;
+      break fn_271;
     }
-    if (slot_281 === 1) {
-      t_260 = new Point((width_253 - qx_279 | 0) - 1 | 0, cy_278);
-      t_261 = new Left();
-      return_257 = new SpawnInfo_77(t_260, t_261);
-      break fn_276;
+    const r1_275 = nextRandom((imul__104(seed_256, 7) + imul__104(index_255, 131) | 0) + 37 | 0, safeW_273);
+    const r2_276 = nextRandom(r1_275.nextSeed, safeH_274);
+    const x_277 = 5 + r1_275.value | 0;
+    const y_278 = 5 + r2_276.value | 0;
+    const r3_279 = nextRandom(r2_276.nextSeed, 4);
+    t_260 = new Right();
+    let dir_280 = t_260;
+    if (r3_279.value === 0) {
+      t_261 = new Right();
+      dir_280 = t_261;
     }
-    if (slot_281 === 2) {
-      t_262 = new Point(cx_277, qy_280);
+    if (r3_279.value === 1) {
+      t_262 = new Left();
+      dir_280 = t_262;
+    }
+    if (r3_279.value === 2) {
       t_263 = new Down();
-      return_257 = new SpawnInfo_77(t_262, t_263);
-      break fn_276;
+      dir_280 = t_263;
     }
-    t_264 = new Point(cx_277, (height_254 - qy_280 | 0) - 1 | 0);
-    t_265 = new Up();
-    return_257 = new SpawnInfo_77(t_264, t_265);
+    if (r3_279.value === 3) {
+      t_264 = new Up();
+      dir_280 = t_264;
+    }
+    t_265 = new Point(x_277, y_278);
+    return_257 = new SpawnInfo_77(t_265, dir_280);
   }
   return return_257;
 }
 /**
- * @param {Array<PlayerSnake>} snakes_283
+ * @param {Array<PlayerSnake>} snakes_282
  * @returns {Array<Point>}
  */
-function collectAllSegments_282(snakes_283) {
+function collectAllSegments_281(snakes_282) {
+  let t_283;
   let t_284;
   let t_285;
   let t_286;
   let t_287;
-  let t_288;
-  const builder_289 = [];
-  let i_290 = 0;
+  const builder_288 = [];
+  let i_289 = 0;
   while (true) {
-    t_284 = snakes_283.length;
-    if (!(i_290 < t_284)) {
+    t_283 = snakes_282.length;
+    if (!(i_289 < t_283)) {
       break;
     }
-    t_285 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-    const snake_291 = listedGetOr_214(snakes_283, i_290, t_285);
-    let j_292 = 0;
+    t_284 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+    const snake_290 = listedGetOr_214(snakes_282, i_289, t_284);
+    let j_291 = 0;
     while (true) {
-      t_286 = snake_291.segments.length;
-      if (!(j_292 < t_286)) {
+      t_285 = snake_290.segments.length;
+      if (!(j_291 < t_285)) {
         break;
       }
-      t_287 = snake_291.segments;
-      t_288 = new Point(0, 0);
-      listBuilderAdd_220(builder_289, listedGetOr_214(t_287, j_292, t_288));
-      j_292 = j_292 + 1 | 0;
+      t_286 = snake_290.segments;
+      t_287 = new Point(0, 0);
+      listBuilderAdd_220(builder_288, listedGetOr_214(t_286, j_291, t_287));
+      j_291 = j_291 + 1 | 0;
     }
-    i_290 = i_290 + 1 | 0;
+    i_289 = i_289 + 1 | 0;
   }
-  return listBuilderToList_224(builder_289);
+  return listBuilderToList_224(builder_288);
 }
 /**
- * @param {number} width_293
- * @param {number} height_294
- * @param {number} numPlayers_295
- * @param {number} seed_296
+ * @param {number} width_292
+ * @param {number} height_293
+ * @param {number} numPlayers_294
+ * @param {number} seed_295
  * @returns {MultiSnakeGame}
  */
-export function newMultiGame(width_293, height_294, numPlayers_295, seed_296) {
-  let t_297;
-  const snakeBuilder_298 = [];
-  let currentSeed_299 = seed_296;
-  let i_300 = 0;
-  while (i_300 < numPlayers_295) {
-    const spawn_301 = spawnPosition_252(width_293, height_294, i_300, numPlayers_295);
-    const dir_302 = spawn_301.direction;
-    const startX_303 = spawn_301.point.x;
-    const startY_304 = spawn_301.point.y;
-    const delta_305 = directionDelta(dir_302);
-    const segments_306 = Object.freeze([new Point(startX_303, startY_304), new Point(startX_303 - delta_305.x | 0, startY_304 - delta_305.y | 0), new Point(startX_303 - imul__104(delta_305.x, 2) | 0, startY_304 - imul__104(delta_305.y, 2) | 0)]);
-    t_297 = new Alive();
-    listBuilderAdd_220(snakeBuilder_298, new PlayerSnake(i_300, segments_306, dir_302, 0, t_297));
-    i_300 = i_300 + 1 | 0;
+export function newMultiGame(width_292, height_293, numPlayers_294, seed_295) {
+  let t_296;
+  const snakeBuilder_297 = [];
+  let currentSeed_298 = seed_295;
+  let i_299 = 0;
+  while (i_299 < numPlayers_294) {
+    const spawn_300 = spawnPosition_252(width_292, height_293, i_299, currentSeed_298);
+    const dir_301 = spawn_300.direction;
+    const startX_302 = spawn_300.point.x;
+    const startY_303 = spawn_300.point.y;
+    const delta_304 = directionDelta(dir_301);
+    const segments_305 = Object.freeze([new Point(startX_302, startY_303), new Point(startX_302 - delta_304.x | 0, startY_303 - delta_304.y | 0), new Point(startX_302 - imul__104(delta_304.x, 2) | 0, startY_303 - imul__104(delta_304.y, 2) | 0)]);
+    t_296 = new Alive();
+    listBuilderAdd_220(snakeBuilder_297, new PlayerSnake(i_299, segments_305, dir_301, 0, t_296));
+    i_299 = i_299 + 1 | 0;
   }
-  let t_307 = listBuilderToList_224(snakeBuilder_298);
-  const allSegments_308 = collectAllSegments_282(t_307);
-  const foodResult_309 = placeFood_109(allSegments_308, width_293, height_294, currentSeed_299);
-  let t_310 = listBuilderToList_224(snakeBuilder_298);
-  let t_311 = foodResult_309.point;
-  let t_312 = foodResult_309.seed;
-  return new MultiSnakeGame(width_293, height_294, t_310, t_311, t_312, 0);
+  let t_306 = listBuilderToList_224(snakeBuilder_297);
+  const allSegments_307 = collectAllSegments_281(t_306);
+  const foodResult_308 = placeFood_109(allSegments_307, width_292, height_293, currentSeed_298);
+  let t_309 = listBuilderToList_224(snakeBuilder_297);
+  let t_310 = foodResult_308.point;
+  let t_311 = foodResult_308.seed;
+  return new MultiSnakeGame(width_292, height_293, t_309, t_310, t_311, 0);
 };
 /**
- * @param {MultiSnakeGame} game_313
- * @param {Array<Direction>} directions_314
+ * @param {MultiSnakeGame} game_312
+ * @param {Array<Direction>} directions_313
  * @returns {MultiSnakeGame}
  */
-export function multiTick(game_313, directions_314) {
+export function multiTick(game_312, directions_313) {
+  let t_314;
   let t_315;
   let t_316;
   let t_317;
@@ -1106,251 +1094,251 @@ export function multiTick(game_313, directions_314) {
   let t_362;
   let t_363;
   let t_364;
-  let t_365;
-  const newDirs_366 = [];
-  let i_367 = 0;
+  const newDirs_365 = [];
+  let i_366 = 0;
   while (true) {
-    t_315 = game_313.snakes.length;
-    if (!(i_367 < t_315)) {
+    t_314 = game_312.snakes.length;
+    if (!(i_366 < t_314)) {
       break;
     }
-    t_316 = game_313.snakes;
-    t_317 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-    const snake_368 = listedGetOr_214(t_316, i_367, t_317);
-    t_318 = snake_368.direction;
-    const inputDir_369 = listedGetOr_214(directions_314, i_367, t_318);
-    if (isOpposite(snake_368.direction, inputDir_369)) {
-      listBuilderAdd_220(newDirs_366, snake_368.direction);
+    t_315 = game_312.snakes;
+    t_316 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+    const snake_367 = listedGetOr_214(t_315, i_366, t_316);
+    t_317 = snake_367.direction;
+    const inputDir_368 = listedGetOr_214(directions_313, i_366, t_317);
+    if (isOpposite(snake_367.direction, inputDir_368)) {
+      listBuilderAdd_220(newDirs_365, snake_367.direction);
     } else {
-      listBuilderAdd_220(newDirs_366, inputDir_369);
+      listBuilderAdd_220(newDirs_365, inputDir_368);
     }
-    i_367 = i_367 + 1 | 0;
+    i_366 = i_366 + 1 | 0;
   }
-  const newHeads_370 = [];
-  let i_371 = 0;
+  const newHeads_369 = [];
+  let i_370 = 0;
   while (true) {
-    t_319 = game_313.snakes.length;
-    if (!(i_371 < t_319)) {
+    t_318 = game_312.snakes.length;
+    if (!(i_370 < t_318)) {
       break;
     }
-    t_320 = game_313.snakes;
-    t_321 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-    const snake_372 = listedGetOr_214(t_320, i_371, t_321);
-    if (snake_372.status instanceof Alive) {
-      t_322 = listBuilderToList_224(newDirs_366);
-      t_323 = new Right();
-      const dir_373 = listedGetOr_214(t_322, i_371, t_323);
-      const delta_374 = directionDelta(dir_373);
-      const head_375 = listedGetOr_214(snake_372.segments, 0, new Point(0, 0));
-      listBuilderAdd_220(newHeads_370, new Point(head_375.x + delta_374.x | 0, head_375.y + delta_374.y | 0));
+    t_319 = game_312.snakes;
+    t_320 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+    const snake_371 = listedGetOr_214(t_319, i_370, t_320);
+    if (snake_371.status instanceof Alive) {
+      t_321 = listBuilderToList_224(newDirs_365);
+      t_322 = new Right();
+      const dir_372 = listedGetOr_214(t_321, i_370, t_322);
+      const delta_373 = directionDelta(dir_372);
+      const head_374 = listedGetOr_214(snake_371.segments, 0, new Point(0, 0));
+      listBuilderAdd_220(newHeads_369, new Point(head_374.x + delta_373.x | 0, head_374.y + delta_373.y | 0));
     } else {
-      listBuilderAdd_220(newHeads_370, new Point(-1, -1));
+      listBuilderAdd_220(newHeads_369, new Point(-1, -1));
     }
-    i_371 = i_371 + 1 | 0;
+    i_370 = i_370 + 1 | 0;
   }
-  const headsList_376 = listBuilderToList_224(newHeads_370);
-  const dirsList_377 = listBuilderToList_224(newDirs_366);
-  const aliveBuilder_378 = [];
-  let i_379 = 0;
+  const headsList_375 = listBuilderToList_224(newHeads_369);
+  const dirsList_376 = listBuilderToList_224(newDirs_365);
+  const aliveBuilder_377 = [];
+  let i_378 = 0;
   while (true) {
-    t_324 = game_313.snakes.length;
-    if (!(i_379 < t_324)) {
+    t_323 = game_312.snakes.length;
+    if (!(i_378 < t_323)) {
       break;
     }
-    t_325 = game_313.snakes;
-    t_326 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-    const snake_380 = listedGetOr_214(t_325, i_379, t_326);
-    if (!(snake_380.status instanceof Alive)) {
-      listBuilderAdd_220(aliveBuilder_378, false);
+    t_324 = game_312.snakes;
+    t_325 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+    const snake_379 = listedGetOr_214(t_324, i_378, t_325);
+    if (!(snake_379.status instanceof Alive)) {
+      listBuilderAdd_220(aliveBuilder_377, false);
     } else {
-      t_327 = new Point(-1, -1);
-      const nh_381 = listedGetOr_214(headsList_376, i_379, t_327);
-      let dead_382 = false;
-      if (nh_381.x < 0) {
-        t_363 = true;
+      t_326 = new Point(-1, -1);
+      const nh_380 = listedGetOr_214(headsList_375, i_378, t_326);
+      let dead_381 = false;
+      if (nh_380.x < 0) {
+        t_362 = true;
       } else {
-        if (nh_381.x >= game_313.width) {
-          t_362 = true;
+        if (nh_380.x >= game_312.width) {
+          t_361 = true;
         } else {
-          if (nh_381.y < 0) {
-            t_361 = true;
+          if (nh_380.y < 0) {
+            t_360 = true;
           } else {
-            t_328 = nh_381.y;
-            t_329 = game_313.height;
-            t_361 = t_328 >= t_329;
+            t_327 = nh_380.y;
+            t_328 = game_312.height;
+            t_360 = t_327 >= t_328;
           }
-          t_362 = t_361;
+          t_361 = t_360;
         }
-        t_363 = t_362;
+        t_362 = t_361;
       }
-      if (t_363) {
-        dead_382 = true;
+      if (t_362) {
+        dead_381 = true;
       }
-      if (! dead_382) {
-        let s_383 = 0;
+      if (! dead_381) {
+        let s_382 = 0;
         while (true) {
-          t_330 = snake_380.segments.length;
-          if (!(s_383 <(t_330 - 1 | 0))) {
+          t_329 = snake_379.segments.length;
+          if (!(s_382 <(t_329 - 1 | 0))) {
             break;
           }
-          t_331 = snake_380.segments;
-          t_332 = new Point(-2, -2);
-          if (pointEquals(nh_381, listedGetOr_214(t_331, s_383, t_332))) {
-            dead_382 = true;
+          t_330 = snake_379.segments;
+          t_331 = new Point(-2, -2);
+          if (pointEquals(nh_380, listedGetOr_214(t_330, s_382, t_331))) {
+            dead_381 = true;
           }
-          s_383 = s_383 + 1 | 0;
+          s_382 = s_382 + 1 | 0;
         }
       }
-      if (! dead_382) {
-        let j_384 = 0;
+      if (! dead_381) {
+        let j_383 = 0;
         while (true) {
-          t_333 = game_313.snakes.length;
-          if (!(j_384 < t_333)) {
+          t_332 = game_312.snakes.length;
+          if (!(j_383 < t_332)) {
             break;
           }
-          if (j_384 !== i_379) {
-            t_334 = game_313.snakes;
-            t_335 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-            const other_385 = listedGetOr_214(t_334, j_384, t_335);
-            if (other_385.status instanceof Alive) {
-              let s_386 = 0;
+          if (j_383 !== i_378) {
+            t_333 = game_312.snakes;
+            t_334 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+            const other_384 = listedGetOr_214(t_333, j_383, t_334);
+            if (other_384.status instanceof Alive) {
+              let s_385 = 0;
               while (true) {
-                t_336 = other_385.segments.length;
-                if (!(s_386 <(t_336 - 1 | 0))) {
+                t_335 = other_384.segments.length;
+                if (!(s_385 <(t_335 - 1 | 0))) {
                   break;
                 }
-                t_337 = other_385.segments;
-                t_338 = new Point(-2, -2);
-                if (pointEquals(nh_381, listedGetOr_214(t_337, s_386, t_338))) {
-                  dead_382 = true;
+                t_336 = other_384.segments;
+                t_337 = new Point(-2, -2);
+                if (pointEquals(nh_380, listedGetOr_214(t_336, s_385, t_337))) {
+                  dead_381 = true;
                 }
-                s_386 = s_386 + 1 | 0;
+                s_385 = s_385 + 1 | 0;
               }
             }
           }
-          j_384 = j_384 + 1 | 0;
+          j_383 = j_383 + 1 | 0;
         }
       }
-      if (! dead_382) {
-        let j_387 = 0;
+      if (! dead_381) {
+        let j_386 = 0;
         while (true) {
-          t_339 = game_313.snakes.length;
-          if (!(j_387 < t_339)) {
+          t_338 = game_312.snakes.length;
+          if (!(j_386 < t_338)) {
             break;
           }
-          if (j_387 !== i_379) {
-            t_340 = game_313.snakes;
-            t_341 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-            const otherSnake_388 = listedGetOr_214(t_340, j_387, t_341);
-            if (otherSnake_388.status instanceof Alive) {
-              t_342 = new Point(-3, -3);
-              const otherHead_389 = listedGetOr_214(headsList_376, j_387, t_342);
-              if (pointEquals(nh_381, otherHead_389)) {
-                dead_382 = true;
+          if (j_386 !== i_378) {
+            t_339 = game_312.snakes;
+            t_340 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+            const otherSnake_387 = listedGetOr_214(t_339, j_386, t_340);
+            if (otherSnake_387.status instanceof Alive) {
+              t_341 = new Point(-3, -3);
+              const otherHead_388 = listedGetOr_214(headsList_375, j_386, t_341);
+              if (pointEquals(nh_380, otherHead_388)) {
+                dead_381 = true;
               }
             }
           }
-          j_387 = j_387 + 1 | 0;
+          j_386 = j_386 + 1 | 0;
         }
       }
-      listBuilderAdd_220(aliveBuilder_378, ! dead_382);
+      listBuilderAdd_220(aliveBuilder_377, ! dead_381);
     }
-    i_379 = i_379 + 1 | 0;
+    i_378 = i_378 + 1 | 0;
   }
-  const aliveList_390 = listBuilderToList_224(aliveBuilder_378);
-  let eaterIndex_391 = -1;
-  let i_392 = 0;
+  const aliveList_389 = listBuilderToList_224(aliveBuilder_377);
+  let eaterIndex_390 = -1;
+  let i_391 = 0;
   while (true) {
-    t_343 = game_313.snakes.length;
-    if (!(i_392 < t_343)) {
+    t_342 = game_312.snakes.length;
+    if (!(i_391 < t_342)) {
       break;
     }
-    if (listedGetOr_214(aliveList_390, i_392, false)) {
-      t_344 = new Point(-1, -1);
-      const nh_393 = listedGetOr_214(headsList_376, i_392, t_344);
-      if (pointEquals(nh_393, game_313.food)) {
-        eaterIndex_391 = i_392;
+    if (listedGetOr_214(aliveList_389, i_391, false)) {
+      t_343 = new Point(-1, -1);
+      const nh_392 = listedGetOr_214(headsList_375, i_391, t_343);
+      if (pointEquals(nh_392, game_312.food)) {
+        eaterIndex_390 = i_391;
       }
     }
-    i_392 = i_392 + 1 | 0;
+    i_391 = i_391 + 1 | 0;
   }
-  const resultSnakes_394 = [];
-  let i_395 = 0;
+  const resultSnakes_393 = [];
+  let i_394 = 0;
   while (true) {
-    t_345 = game_313.snakes.length;
-    if (!(i_395 < t_345)) {
+    t_344 = game_312.snakes.length;
+    if (!(i_394 < t_344)) {
       break;
     }
-    t_346 = game_313.snakes;
-    t_347 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-    const snake_396 = listedGetOr_214(t_346, i_395, t_347);
-    if (!(snake_396.status instanceof Alive)) {
-      listBuilderAdd_220(resultSnakes_394, snake_396);
-    } else if (! listedGetOr_214(aliveList_390, i_395, false)) {
-      listBuilderAdd_220(resultSnakes_394, new PlayerSnake(snake_396.id, snake_396.segments, snake_396.direction, snake_396.score, new Dead()));
+    t_345 = game_312.snakes;
+    t_346 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+    const snake_395 = listedGetOr_214(t_345, i_394, t_346);
+    if (!(snake_395.status instanceof Alive)) {
+      listBuilderAdd_220(resultSnakes_393, snake_395);
+    } else if (! listedGetOr_214(aliveList_389, i_394, false)) {
+      listBuilderAdd_220(resultSnakes_393, new PlayerSnake(snake_395.id, snake_395.segments, snake_395.direction, snake_395.score, new Dead()));
     } else {
-      t_348 = new Point(0, 0);
-      const nh_397 = listedGetOr_214(headsList_376, i_395, t_348);
-      t_349 = snake_396.direction;
-      const dir_398 = listedGetOr_214(dirsList_377, i_395, t_349);
-      const isEating_399 = i_395 === eaterIndex_391;
-      if (isEating_399) {
-        t_350 = snake_396.segments.length;
-        t_364 = t_350;
+      t_347 = new Point(0, 0);
+      const nh_396 = listedGetOr_214(headsList_375, i_394, t_347);
+      t_348 = snake_395.direction;
+      const dir_397 = listedGetOr_214(dirsList_376, i_394, t_348);
+      const isEating_398 = i_394 === eaterIndex_390;
+      if (isEating_398) {
+        t_349 = snake_395.segments.length;
+        t_363 = t_349;
       } else {
-        t_351 = snake_396.segments.length;
-        t_364 = t_351 - 1 | 0;
+        t_350 = snake_395.segments.length;
+        t_363 = t_350 - 1 | 0;
       }
-      const keepLen_400 = t_364;
-      const newSegs_401 = [];
-      listBuilderAdd_220(newSegs_401, nh_397);
-      let s_402 = 0;
-      while (s_402 < keepLen_400) {
-        t_352 = snake_396.segments;
-        t_353 = new Point(0, 0);
-        listBuilderAdd_220(newSegs_401, listedGetOr_214(t_352, s_402, t_353));
-        s_402 = s_402 + 1 | 0;
+      const keepLen_399 = t_363;
+      const newSegs_400 = [];
+      listBuilderAdd_220(newSegs_400, nh_396);
+      let s_401 = 0;
+      while (s_401 < keepLen_399) {
+        t_351 = snake_395.segments;
+        t_352 = new Point(0, 0);
+        listBuilderAdd_220(newSegs_400, listedGetOr_214(t_351, s_401, t_352));
+        s_401 = s_401 + 1 | 0;
       }
-      if (isEating_399) {
-        t_354 = snake_396.score;
-        t_365 = t_354 + 1 | 0;
+      if (isEating_398) {
+        t_353 = snake_395.score;
+        t_364 = t_353 + 1 | 0;
       } else {
-        t_355 = snake_396.score;
-        t_365 = t_355;
+        t_354 = snake_395.score;
+        t_364 = t_354;
       }
-      const newScore_403 = t_365;
-      listBuilderAdd_220(resultSnakes_394, new PlayerSnake(snake_396.id, listBuilderToList_224(newSegs_401), dir_398, newScore_403, new Alive()));
+      const newScore_402 = t_364;
+      listBuilderAdd_220(resultSnakes_393, new PlayerSnake(snake_395.id, listBuilderToList_224(newSegs_400), dir_397, newScore_402, new Alive()));
     }
-    i_395 = i_395 + 1 | 0;
+    i_394 = i_394 + 1 | 0;
   }
-  const resultSnakesList_404 = listBuilderToList_224(resultSnakes_394);
-  let t_405 = game_313.food;
-  let newFood_406 = t_405;
-  let t_407 = game_313.rngSeed;
-  let newSeed_408 = t_407;
-  if (eaterIndex_391 >= 0) {
-    const allSegs_409 = collectAllSegments_282(resultSnakesList_404);
-    t_356 = game_313.width;
-    t_357 = game_313.height;
-    t_358 = game_313.rngSeed;
-    const foodResult_410 = placeFood_109(allSegs_409, t_356, t_357, t_358);
-    t_359 = foodResult_410.point;
-    newFood_406 = t_359;
-    t_360 = foodResult_410.seed;
-    newSeed_408 = t_360;
+  const resultSnakesList_403 = listBuilderToList_224(resultSnakes_393);
+  let t_404 = game_312.food;
+  let newFood_405 = t_404;
+  let t_406 = game_312.rngSeed;
+  let newSeed_407 = t_406;
+  if (eaterIndex_390 >= 0) {
+    const allSegs_408 = collectAllSegments_281(resultSnakesList_403);
+    t_355 = game_312.width;
+    t_356 = game_312.height;
+    t_357 = game_312.rngSeed;
+    const foodResult_409 = placeFood_109(allSegs_408, t_355, t_356, t_357);
+    t_358 = foodResult_409.point;
+    newFood_405 = t_358;
+    t_359 = foodResult_409.seed;
+    newSeed_407 = t_359;
   }
-  let t_411 = game_313.width;
-  let t_412 = game_313.height;
-  let t_413 = game_313.tickCount;
-  return new MultiSnakeGame(t_411, t_412, resultSnakesList_404, newFood_406, newSeed_408, t_413 + 1 | 0);
+  let t_410 = game_312.width;
+  let t_411 = game_312.height;
+  let t_412 = game_312.tickCount;
+  return new MultiSnakeGame(t_410, t_411, resultSnakesList_403, newFood_405, newSeed_407, t_412 + 1 | 0);
 };
 /**
- * @param {MultiSnakeGame} game_414
- * @param {number} playerId_415
- * @param {Direction} dir_416
+ * @param {MultiSnakeGame} game_413
+ * @param {number} playerId_414
+ * @param {Direction} dir_415
  * @returns {MultiSnakeGame}
  */
-export function changePlayerDirection(game_414, playerId_415, dir_416) {
+export function changePlayerDirection(game_413, playerId_414, dir_415) {
+  let t_416;
   let t_417;
   let t_418;
   let t_419;
@@ -1360,182 +1348,182 @@ export function changePlayerDirection(game_414, playerId_415, dir_416) {
   let t_423;
   let t_424;
   let t_425;
-  let t_426;
-  const newSnakes_427 = [];
-  let i_428 = 0;
+  const newSnakes_426 = [];
+  let i_427 = 0;
   while (true) {
-    t_417 = game_414.snakes.length;
-    if (!(i_428 < t_417)) {
+    t_416 = game_413.snakes.length;
+    if (!(i_427 < t_416)) {
       break;
     }
-    t_418 = game_414.snakes;
-    t_419 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-    const snake_429 = listedGetOr_214(t_418, i_428, t_419);
-    if (snake_429.id === playerId_415) {
-      if (snake_429.status instanceof Alive) {
-        t_420 = snake_429.direction;
-        t_425 = ! isOpposite(t_420, dir_416);
+    t_417 = game_413.snakes;
+    t_418 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+    const snake_428 = listedGetOr_214(t_417, i_427, t_418);
+    if (snake_428.id === playerId_414) {
+      if (snake_428.status instanceof Alive) {
+        t_419 = snake_428.direction;
+        t_424 = ! isOpposite(t_419, dir_415);
       } else {
-        t_425 = false;
+        t_424 = false;
       }
-      t_426 = t_425;
+      t_425 = t_424;
     } else {
-      t_426 = false;
+      t_425 = false;
     }
-    if (t_426) {
-      t_421 = snake_429.id;
-      t_422 = snake_429.segments;
-      t_423 = snake_429.score;
-      t_424 = snake_429.status;
-      listBuilderAdd_220(newSnakes_427, new PlayerSnake(t_421, t_422, dir_416, t_423, t_424));
+    if (t_425) {
+      t_420 = snake_428.id;
+      t_421 = snake_428.segments;
+      t_422 = snake_428.score;
+      t_423 = snake_428.status;
+      listBuilderAdd_220(newSnakes_426, new PlayerSnake(t_420, t_421, dir_415, t_422, t_423));
     } else {
-      listBuilderAdd_220(newSnakes_427, snake_429);
+      listBuilderAdd_220(newSnakes_426, snake_428);
     }
-    i_428 = i_428 + 1 | 0;
+    i_427 = i_427 + 1 | 0;
   }
-  return new MultiSnakeGame(game_414.width, game_414.height, listBuilderToList_224(newSnakes_427), game_414.food, game_414.rngSeed, game_414.tickCount);
+  return new MultiSnakeGame(game_413.width, game_413.height, listBuilderToList_224(newSnakes_426), game_413.food, game_413.rngSeed, game_413.tickCount);
 };
 /**
- * @param {MultiSnakeGame} game_430
+ * @param {MultiSnakeGame} game_429
  * @returns {boolean}
  */
-export function isMultiGameOver(game_430) {
-  let return_431;
+export function isMultiGameOver(game_429) {
+  let return_430;
+  let t_431;
   let t_432;
   let t_433;
-  let t_434;
-  let aliveCount_435 = 0;
-  let i_436 = 0;
+  let aliveCount_434 = 0;
+  let i_435 = 0;
   while (true) {
-    t_432 = game_430.snakes.length;
-    if (!(i_436 < t_432)) {
+    t_431 = game_429.snakes.length;
+    if (!(i_435 < t_431)) {
       break;
     }
-    t_433 = game_430.snakes;
-    t_434 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-    const snake_437 = listedGetOr_214(t_433, i_436, t_434);
-    if (snake_437.status instanceof Alive) {
-      aliveCount_435 = aliveCount_435 + 1 | 0;
+    t_432 = game_429.snakes;
+    t_433 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+    const snake_436 = listedGetOr_214(t_432, i_435, t_433);
+    if (snake_436.status instanceof Alive) {
+      aliveCount_434 = aliveCount_434 + 1 | 0;
     }
-    i_436 = i_436 + 1 | 0;
+    i_435 = i_435 + 1 | 0;
   }
-  if (game_430.snakes.length === 0) {
-    return_431 = false;
-  } else if (game_430.snakes.length === 1) {
-    return_431 = aliveCount_435 === 0;
+  if (game_429.snakes.length === 0) {
+    return_430 = false;
+  } else if (game_429.snakes.length === 1) {
+    return_430 = aliveCount_434 === 0;
   } else {
-    return_431 = aliveCount_435 <= 1;
+    return_430 = aliveCount_434 <= 1;
   }
-  return return_431;
+  return return_430;
 };
 /**
- * @param {MultiSnakeGame} game_438
- * @param {number} seed_439
+ * @param {MultiSnakeGame} game_437
+ * @param {number} seed_438
  * @returns {MultiSnakeGame}
  */
-export function addPlayer(game_438, seed_439) {
+export function addPlayer(game_437, seed_438) {
+  let t_439;
   let t_440;
   let t_441;
-  let t_442;
-  const newId_443 = game_438.snakes.length;
-  const spawn_444 = spawnPosition_252(game_438.width, game_438.height, newId_443, newId_443 + 1 | 0);
-  const dir_445 = spawn_444.direction;
-  const delta_446 = directionDelta(dir_445);
-  const startX_447 = spawn_444.point.x;
-  const startY_448 = spawn_444.point.y;
-  const segments_449 = Object.freeze([new Point(startX_447, startY_448), new Point(startX_447 - delta_446.x | 0, startY_448 - delta_446.y | 0), new Point(startX_447 - imul__104(delta_446.x, 2) | 0, startY_448 - imul__104(delta_446.y, 2) | 0)]);
-  const newSnake_450 = new PlayerSnake(newId_443, segments_449, dir_445, 0, new Alive());
-  const builder_451 = [];
-  let i_452 = 0;
+  const newId_442 = game_437.snakes.length;
+  const spawn_443 = spawnPosition_252(game_437.width, game_437.height, newId_442, seed_438);
+  const dir_444 = spawn_443.direction;
+  const delta_445 = directionDelta(dir_444);
+  const startX_446 = spawn_443.point.x;
+  const startY_447 = spawn_443.point.y;
+  const segments_448 = Object.freeze([new Point(startX_446, startY_447), new Point(startX_446 - delta_445.x | 0, startY_447 - delta_445.y | 0), new Point(startX_446 - imul__104(delta_445.x, 2) | 0, startY_447 - imul__104(delta_445.y, 2) | 0)]);
+  const newSnake_449 = new PlayerSnake(newId_442, segments_448, dir_444, 0, new Alive());
+  const builder_450 = [];
+  let i_451 = 0;
   while (true) {
-    t_440 = game_438.snakes.length;
-    if (!(i_452 < t_440)) {
+    t_439 = game_437.snakes.length;
+    if (!(i_451 < t_439)) {
       break;
     }
-    t_441 = game_438.snakes;
-    t_442 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-    listBuilderAdd_220(builder_451, listedGetOr_214(t_441, i_452, t_442));
-    i_452 = i_452 + 1 | 0;
+    t_440 = game_437.snakes;
+    t_441 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+    listBuilderAdd_220(builder_450, listedGetOr_214(t_440, i_451, t_441));
+    i_451 = i_451 + 1 | 0;
   }
-  listBuilderAdd_220(builder_451, newSnake_450);
-  let t_453 = listBuilderToList_224(builder_451);
-  const allSegs_454 = collectAllSegments_282(t_453);
-  let t_455 = game_438.width;
-  let t_456 = game_438.height;
-  const foodResult_457 = placeFood_109(allSegs_454, t_455, t_456, seed_439);
-  return new MultiSnakeGame(game_438.width, game_438.height, listBuilderToList_224(builder_451), foodResult_457.point, foodResult_457.seed, game_438.tickCount);
+  listBuilderAdd_220(builder_450, newSnake_449);
+  let t_452 = listBuilderToList_224(builder_450);
+  const allSegs_453 = collectAllSegments_281(t_452);
+  let t_454 = game_437.width;
+  let t_455 = game_437.height;
+  const foodResult_456 = placeFood_109(allSegs_453, t_454, t_455, seed_438);
+  return new MultiSnakeGame(game_437.width, game_437.height, listBuilderToList_224(builder_450), foodResult_456.point, foodResult_456.seed, game_437.tickCount);
 };
 /**
- * @param {MultiSnakeGame} game_458
- * @param {number} playerId_459
+ * @param {MultiSnakeGame} game_457
+ * @param {number} playerId_458
  * @returns {MultiSnakeGame}
  */
-export function removePlayer(game_458, playerId_459) {
+export function removePlayer(game_457, playerId_458) {
+  let t_459;
   let t_460;
   let t_461;
-  let t_462;
-  const builder_463 = [];
-  let i_464 = 0;
+  const builder_462 = [];
+  let i_463 = 0;
   while (true) {
-    t_460 = game_458.snakes.length;
-    if (!(i_464 < t_460)) {
+    t_459 = game_457.snakes.length;
+    if (!(i_463 < t_459)) {
       break;
     }
-    t_461 = game_458.snakes;
-    t_462 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-    const snake_465 = listedGetOr_214(t_461, i_464, t_462);
-    if (snake_465.id !== playerId_459) {
-      listBuilderAdd_220(builder_463, snake_465);
+    t_460 = game_457.snakes;
+    t_461 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+    const snake_464 = listedGetOr_214(t_460, i_463, t_461);
+    if (snake_464.id !== playerId_458) {
+      listBuilderAdd_220(builder_462, snake_464);
     }
-    i_464 = i_464 + 1 | 0;
+    i_463 = i_463 + 1 | 0;
   }
-  return new MultiSnakeGame(game_458.width, game_458.height, listBuilderToList_224(builder_463), game_458.food, game_458.rngSeed, game_458.tickCount);
+  return new MultiSnakeGame(game_457.width, game_457.height, listBuilderToList_224(builder_462), game_457.food, game_457.rngSeed, game_457.tickCount);
 };
 /**
- * @param {number} id_466
+ * @param {number} id_465
  * @returns {string}
  */
-export function playerHeadChar(id_466) {
-  let return_467;
-  if (id_466 === 0) {
-    return_467 = "@";
-  } else if (id_466 === 1) {
-    return_467 = "#";
-  } else if (id_466 === 2) {
-    return_467 = "$";
-  } else if (id_466 === 3) {
-    return_467 = "%";
+export function playerHeadChar(id_465) {
+  let return_466;
+  if (id_465 === 0) {
+    return_466 = "@";
+  } else if (id_465 === 1) {
+    return_466 = "#";
+  } else if (id_465 === 2) {
+    return_466 = "$";
+  } else if (id_465 === 3) {
+    return_466 = "%";
   } else {
-    return_467 = "&";
+    return_466 = "&";
   }
-  return return_467;
+  return return_466;
 };
 /**
- * @param {number} id_468
+ * @param {number} id_467
  * @returns {string}
  */
-export function playerBodyChar(id_468) {
-  let return_469;
-  if (id_468 === 0) {
-    return_469 = "o";
-  } else if (id_468 === 1) {
-    return_469 = "+";
-  } else if (id_468 === 2) {
-    return_469 = "~";
-  } else if (id_468 === 3) {
-    return_469 = "=";
+export function playerBodyChar(id_467) {
+  let return_468;
+  if (id_467 === 0) {
+    return_468 = "o";
+  } else if (id_467 === 1) {
+    return_468 = "+";
+  } else if (id_467 === 2) {
+    return_468 = "~";
+  } else if (id_467 === 3) {
+    return_468 = "=";
   } else {
-    return_469 = ".";
+    return_468 = ".";
   }
-  return return_469;
+  return return_468;
 };
 /**
- * @param {MultiSnakeGame} game_471
- * @param {Point} p_472
+ * @param {MultiSnakeGame} game_470
+ * @param {Point} p_471
  * @returns {string}
  */
-function multiCellChar_470(game_471, p_472) {
-  let return_473;
+function multiCellChar_469(game_470, p_471) {
+  let return_472;
+  let t_473;
   let t_474;
   let t_475;
   let t_476;
@@ -1548,68 +1536,68 @@ function multiCellChar_470(game_471, p_472) {
   let t_483;
   let t_484;
   let t_485;
-  let t_486;
-  fn_487: {
-    let i_488 = 0;
+  fn_486: {
+    let i_487 = 0;
     while (true) {
-      t_474 = game_471.snakes.length;
-      if (!(i_488 < t_474)) {
+      t_473 = game_470.snakes.length;
+      if (!(i_487 < t_473)) {
         break;
       }
-      t_475 = game_471.snakes;
-      t_476 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-      const snake_489 = listedGetOr_214(t_475, i_488, t_476);
-      if (snake_489.segments.length > 0) {
-        const head_490 = listedGetOr_214(snake_489.segments, 0, new Point(-1, -1));
-        if (pointEquals(p_472, head_490)) {
-          t_477 = snake_489.id;
-          return_473 = playerHeadChar(t_477);
-          break fn_487;
+      t_474 = game_470.snakes;
+      t_475 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+      const snake_488 = listedGetOr_214(t_474, i_487, t_475);
+      if (snake_488.segments.length > 0) {
+        const head_489 = listedGetOr_214(snake_488.segments, 0, new Point(-1, -1));
+        if (pointEquals(p_471, head_489)) {
+          t_476 = snake_488.id;
+          return_472 = playerHeadChar(t_476);
+          break fn_486;
         }
       }
-      i_488 = i_488 + 1 | 0;
+      i_487 = i_487 + 1 | 0;
     }
-    let i_491 = 0;
+    let i_490 = 0;
     while (true) {
-      t_478 = game_471.snakes.length;
-      if (!(i_491 < t_478)) {
+      t_477 = game_470.snakes.length;
+      if (!(i_490 < t_477)) {
         break;
       }
-      t_479 = game_471.snakes;
-      t_480 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-      const snake_492 = listedGetOr_214(t_479, i_491, t_480);
-      let j_493 = 1;
+      t_478 = game_470.snakes;
+      t_479 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+      const snake_491 = listedGetOr_214(t_478, i_490, t_479);
+      let j_492 = 1;
       while (true) {
-        t_481 = snake_492.segments.length;
-        if (!(j_493 < t_481)) {
+        t_480 = snake_491.segments.length;
+        if (!(j_492 < t_480)) {
           break;
         }
-        t_482 = snake_492.segments;
-        t_483 = new Point(-1, -1);
-        t_484 = listedGetOr_214(t_482, j_493, t_483);
-        if (pointEquals(p_472, t_484)) {
-          t_485 = snake_492.id;
-          return_473 = playerBodyChar(t_485);
-          break fn_487;
+        t_481 = snake_491.segments;
+        t_482 = new Point(-1, -1);
+        t_483 = listedGetOr_214(t_481, j_492, t_482);
+        if (pointEquals(p_471, t_483)) {
+          t_484 = snake_491.id;
+          return_472 = playerBodyChar(t_484);
+          break fn_486;
         }
-        j_493 = j_493 + 1 | 0;
+        j_492 = j_492 + 1 | 0;
       }
-      i_491 = i_491 + 1 | 0;
+      i_490 = i_490 + 1 | 0;
     }
-    t_486 = game_471.food;
-    if (pointEquals(p_472, t_486)) {
-      return_473 = "*";
-      break fn_487;
+    t_485 = game_470.food;
+    if (pointEquals(p_471, t_485)) {
+      return_472 = "*";
+      break fn_486;
     }
-    return_473 = " ";
+    return_472 = " ";
   }
-  return return_473;
+  return return_472;
 }
 /**
- * @param {MultiSnakeGame} game_494
+ * @param {MultiSnakeGame} game_493
  * @returns {string}
  */
-export function multiRender(game_494) {
+export function multiRender(game_493) {
+  let t_494;
   let t_495;
   let t_496;
   let t_497;
@@ -1618,118 +1606,117 @@ export function multiRender(game_494) {
   let t_500;
   let t_501;
   let t_502;
-  let t_503;
-  const sb_504 = [""];
-  sb_504[0] += "\x1b[2J\x1b[H";
-  sb_504[0] += "#";
-  let x_505 = 0;
+  const sb_503 = [""];
+  sb_503[0] += "\x1b[2J\x1b[H";
+  sb_503[0] += "#";
+  let x_504 = 0;
   while (true) {
-    t_495 = game_494.width;
-    if (!(x_505 < t_495)) {
+    t_494 = game_493.width;
+    if (!(x_504 < t_494)) {
       break;
     }
-    sb_504[0] += "#";
-    x_505 = x_505 + 1 | 0;
+    sb_503[0] += "#";
+    x_504 = x_504 + 1 | 0;
   }
-  sb_504[0] += "#\r\n";
-  let y_506 = 0;
+  sb_503[0] += "#\r\n";
+  let y_505 = 0;
   while (true) {
-    t_496 = game_494.height;
-    if (!(y_506 < t_496)) {
+    t_495 = game_493.height;
+    if (!(y_505 < t_495)) {
       break;
     }
-    sb_504[0] += "#";
-    let x_507 = 0;
+    sb_503[0] += "#";
+    let x_506 = 0;
     while (true) {
-      t_497 = game_494.width;
-      if (!(x_507 < t_497)) {
+      t_496 = game_493.width;
+      if (!(x_506 < t_496)) {
         break;
       }
-      const p_508 = new Point(x_507, y_506);
-      sb_504[0] += multiCellChar_470(game_494, p_508);
-      x_507 = x_507 + 1 | 0;
+      const p_507 = new Point(x_506, y_505);
+      sb_503[0] += multiCellChar_469(game_493, p_507);
+      x_506 = x_506 + 1 | 0;
     }
-    sb_504[0] += "#\r\n";
-    y_506 = y_506 + 1 | 0;
+    sb_503[0] += "#\r\n";
+    y_505 = y_505 + 1 | 0;
   }
-  sb_504[0] += "#";
-  let x_509 = 0;
+  sb_503[0] += "#";
+  let x_508 = 0;
   while (true) {
-    t_498 = game_494.width;
-    if (!(x_509 < t_498)) {
+    t_497 = game_493.width;
+    if (!(x_508 < t_497)) {
       break;
     }
-    sb_504[0] += "#";
-    x_509 = x_509 + 1 | 0;
+    sb_503[0] += "#";
+    x_508 = x_508 + 1 | 0;
   }
-  sb_504[0] += "#\r\n";
-  let i_510 = 0;
+  sb_503[0] += "#\r\n";
+  let i_509 = 0;
   while (true) {
-    t_499 = game_494.snakes.length;
-    if (!(i_510 < t_499)) {
+    t_498 = game_493.snakes.length;
+    if (!(i_509 < t_498)) {
       break;
     }
-    t_500 = game_494.snakes;
-    t_501 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
-    const snake_511 = listedGetOr_214(t_500, i_510, t_501);
-    t_502 = snake_511.status;
-    if (t_502 instanceof Alive) {
-      t_503 = "Playing";
-    } else if (t_502 instanceof Dead) {
-      t_503 = "DEAD";
+    t_499 = game_493.snakes;
+    t_500 = new PlayerSnake(0, Object.freeze([]), new Right(), 0, new Dead());
+    const snake_510 = listedGetOr_214(t_499, i_509, t_500);
+    t_501 = snake_510.status;
+    if (t_501 instanceof Alive) {
+      t_502 = "Playing";
+    } else if (t_501 instanceof Dead) {
+      t_502 = "DEAD";
     } else {
-      t_503 = "";
+      t_502 = "";
     }
-    const statusText_512 = t_503;
-    const symbol_513 = playerHeadChar(snake_511.id);
-    sb_504[0] += "P" + snake_511.id.toString() + " " + symbol_513 + ": " + snake_511.score.toString() + "  " + statusText_512 + "\r" + "\n";
-    i_510 = i_510 + 1 | 0;
+    const statusText_511 = t_502;
+    const symbol_512 = playerHeadChar(snake_510.id);
+    sb_503[0] += "P" + snake_510.id.toString() + " " + symbol_512 + ": " + snake_510.score.toString() + "  " + statusText_511 + "\r" + "\n";
+    i_509 = i_509 + 1 | 0;
   }
-  return sb_504[0];
+  return sb_503[0];
 };
 /**
- * @param {Direction} dir_514
+ * @param {Direction} dir_513
  * @returns {string}
  */
-export function directionToString(dir_514) {
-  let return_515;
-  if (dir_514 instanceof Up) {
-    return_515 = "up";
-  } else if (dir_514 instanceof Down) {
-    return_515 = "down";
-  } else if (dir_514 instanceof Left) {
-    return_515 = "left";
-  } else if (dir_514 instanceof Right) {
-    return_515 = "right";
+export function directionToString(dir_513) {
+  let return_514;
+  if (dir_513 instanceof Up) {
+    return_514 = "up";
+  } else if (dir_513 instanceof Down) {
+    return_514 = "down";
+  } else if (dir_513 instanceof Left) {
+    return_514 = "left";
+  } else if (dir_513 instanceof Right) {
+    return_514 = "right";
   } else {
-    return_515 = "right";
+    return_514 = "right";
   }
-  return return_515;
+  return return_514;
 };
 /**
- * @param {string} s_516
+ * @param {string} s_515
  * @returns {Direction | null}
  */
-export function stringToDirection(s_516) {
-  let return_517;
-  fn_518: {
-    if (s_516 === "up") {
-      return_517 = new Up();
-      break fn_518;
+export function stringToDirection(s_515) {
+  let return_516;
+  fn_517: {
+    if (s_515 === "up") {
+      return_516 = new Up();
+      break fn_517;
     }
-    if (s_516 === "down") {
-      return_517 = new Down();
-      break fn_518;
+    if (s_515 === "down") {
+      return_516 = new Down();
+      break fn_517;
     }
-    if (s_516 === "left") {
-      return_517 = new Left();
-      break fn_518;
+    if (s_515 === "left") {
+      return_516 = new Left();
+      break fn_517;
     }
-    if (s_516 === "right") {
-      return_517 = new Right();
-      break fn_518;
+    if (s_515 === "right") {
+      return_516 = new Right();
+      break fn_517;
     }
-    return_517 = null;
+    return_516 = null;
   }
-  return return_517;
+  return return_516;
 };
